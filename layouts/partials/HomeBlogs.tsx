@@ -9,11 +9,11 @@ import Image from "next/image";
 const HomeBlogs = ({blog}) => {
     return <div>
         <div className="text-center">
-            <div className="coatainer mx-auto lg:col-10" data-aos="fade-right">
+            <div className="coatainer mx-auto lg:col-10" data-aos="fade-up">
                 <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{blog.title}</h1>
             </div>
             {blog?.blogs.map((blog: any, index: number) => {
-                const isOdd = index % 2 > 0;
+                const isOdd = index % 2 !== 0;
                 return (
                     <section
                         key={`blog-${index}`}
@@ -22,7 +22,7 @@ const HomeBlogs = ({blog}) => {
                         <div className="container">
                             <div className="items-center gap-8 md:grid md:grid-cols-2">
                                 {/* Carousel */}
-                                <div className={`service-carousel ${!isOdd && "md:order-2"}`} data-aos="fade-right" data-aos-delay={(index + 1) * 100}>
+                                <div className={`service-carousel ${!isOdd && "md:order-2"}`} data-aos={isOdd ? "fade-up" : "fade-up"} data-aos-delay={(index + 1) * 100}>
                                     <Swiper
                                         modules={[Autoplay, Pagination]}
                                         pagination={
@@ -45,7 +45,7 @@ const HomeBlogs = ({blog}) => {
 
                                 {/* Content */}
                                 <div
-                                    data-aos="fade-left" data-aos-delay={(index + 1) * 100}
+                                    data-aos={isOdd ? "fade-up" : "fade-up"} data-aos-delay={(index + 1) * 100}
                                     className={`${isOdd ? 'text-start md:text-end' : 'text-start'} mt-5 md:mt-0 ${
                                         !isOdd && "md:order-1"
                                     }`}

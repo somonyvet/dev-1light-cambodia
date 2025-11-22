@@ -8,18 +8,18 @@ const HomeHero = ({hero}) => {
             <div className="container">
                 <div className="row md:text-center">
                     <div className="mx-auto lg:col-10">
-                        <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-right">{hero.title}</h1>
-                        <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-right" data-aos-delay={100}>{markdownify(hero.content)}</p>
+                        <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{hero.title}</h1>
+                        <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{markdownify(hero.content)}</p>
                         <div className="mt-4 flex gap-2 md:gap-5 md:justify-center">
                             {hero.ctaButtons.map((btn: any, index: number) => (
-                                <Link
-                                    key={index}
-                                    className={`btn ${btn.variant}`}
-                                    href={btn.link}
-                                    data-aos={index ? "fade-left" :"fade-right"} data-aos-delay={200}
-                                >
-                                    {btn.label}
-                                </Link>
+                                <div key={index} data-aos={index ? "fade-up" :"fade-up"} data-aos-delay={200}>
+                                    <Link
+                                        className={`btn ${btn.variant}`}
+                                        href={btn.link}
+                                    >
+                                        {btn.label}
+                                    </Link>
+                                </div>
                             ))}
                         </div>
                         <Image
@@ -30,7 +30,7 @@ const HomeHero = ({hero}) => {
                             style={{width: "auto", height: "auto"}}
                             alt="hero-image"
                             priority
-                            data-aos="fade-right"
+                            data-aos="fade-up"
                             data-aos-delay={300}
                         />
                     </div>

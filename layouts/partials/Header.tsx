@@ -16,7 +16,7 @@ const Header = () => {
     const {enable, label, link} = config.nav_button;
 
     return (
-        <header className="header">
+        <header className="header" data-aos="fade-down">
             <nav className="navbar container pl-0.5">
                 {/* logo */}
                 <div className="order-0">
@@ -53,19 +53,18 @@ const Header = () => {
                     }`}
                 >
                     <ul className="navbar-nav block w-full md:flex md:w-auto lg:space-x-2">
-                        {main.map((menu, i) => (
+                        {main.map((menu: any, i: number) => (
                             <React.Fragment key={`menu-${i}`}>
                                 {menu.hasChildren ? (
                                     <li className="nav-item nav-dropdown group relative">
-                    <span className="nav-link inline-flex items-center">
-                      {menu.name}
-                        <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                      </svg>
-                    </span>
+                                        <span className="nav-link inline-flex items-center">{menu.name}
+                                            <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                            </svg>
+                                        </span>
                                         <ul
                                             className="nav-dropdown-list hidden group-hover:block md:invisible md:absolute md:block md:opacity-0 md:group-hover:visible md:group-hover:opacity-100">
-                                            {menu.children.map((child, i) => (
+                                            {menu.children.map((child: any, i: number) => (
                                                 <li className="nav-dropdown-item" key={`children-${i}`}>
                                                     <Link
                                                         href={child.url}

@@ -102,17 +102,17 @@ const ContactForm = () => {
             </div>
         </div>}
         <form className="contact-form mt-5 md:mt-0" onSubmit={form.handleSubmit}>
-            <h5 className="mb-5" data-aos="fade-right" data-aos-delay={200}>Send your message to our Email</h5>
-            <div className="mb-3" data-aos="fade-right" data-aos-delay={300}>
+            <h5 className="mb-5" data-aos="fade-up" data-aos-delay={200}>Send your message to our Email</h5>
+            <div className="mb-3" data-aos="fade-up" data-aos-delay={300}>
                 <input className="form-input w-full" name="name" type="text" placeholder="Name" value={form.values.name} onChange={onInputChange} required/>
             </div>
-            <div className="mb-3" data-aos="fade-right" data-aos-delay={400}>
+            <div className="mb-3" data-aos="fade-up" data-aos-delay={400}>
                 <input className="form-input w-full" name="email" type="email" placeholder="Your email" value={form.values.email} onChange={onInputChange} required/>
             </div>
-            <div className="mb-3" data-aos="fade-right" data-aos-delay={500}>
+            <div className="mb-3" data-aos="fade-up" data-aos-delay={500}>
                 <input className="form-input w-full" name="subject" type="text" placeholder="Subject" value={form.values.subject} onChange={onInputChange} required/>
             </div>
-            <div className="mb-3" data-aos="fade-right" data-aos-delay={600}>
+            <div className="mb-3" data-aos="fade-up" data-aos-delay={600}>
                 <textarea className="form-textarea w-full rounded-lg" rows={7} placeholder="Your message" name="message" value={form.values.message} onChange={onInputChange}/>
             </div>
             <button type="submit" className="h-[50px] btn btn-primary mx-auto flex gap-2 justify-center items-center" disabled={!form.isValid || loading} data-aos="fade-up" data-aos-delay={700}>

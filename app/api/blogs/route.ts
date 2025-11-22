@@ -1,36 +1,37 @@
 import {NextRequest, NextResponse} from "next/server";
-import {collection, getDocs} from "@firebase/firestore";
-import {db} from "@lib/firebase";
+import {adminDb} from "@lib/firebaseAdmin";
 
-export async function GET(request: NextRequest) {
+export async function GET(req: NextRequest) {
     try {
-        const {searchParams} = new URL(request.url);
-        const size = parseInt(searchParams.get("size") || "10", 10);
-        const blogCollection = collection(<any>db, "blogs");
-        const blogSnapshot = await getDocs(blogCollection);
-        const blogList = blogSnapshot.docs;
-        const data = blogList.map((blog) => ({_id: blog.id, ...blog.data()}));
+        const {searchParams} = new URL(req.url);
+        const sizeParam = parseInt(searchParams.get("size") || "25");
+        const pageParam = parseInt(searchParams.get("page") || "1");
+
+        const size = isNaN(sizeParam) ? 25 : sizeParam;
+        const page = isNaN(pageParam) ? 1 : pageParam;
+
+        const ref = adminDb.collection("blogs")
+        const snapshot = await ref.orderBy("createdAt", "desc").offset((page - 1) * size).limit(size).get();
+        const totalSnapshot = await ref.get();
+        const filteredSnapshot = snapshot.docs.filter(doc => doc.data()["status"] === "published");
+        const blogList = filteredSnapshot.map(doc => ({id: doc.id, ...doc.data()}));
         const paging = blogList.length === 0 ? null : {
             size,
-            page: 1,
-            total: blogList.length,
-            totalPages: Math.trunc(blogList.length / size)
+            page,
+            total: totalSnapshot.docs.length,
+            totalPages: Math.trunc(totalSnapshot.docs.length / size) + 1
         }
 
-        return new NextResponse(JSON.stringify({
-            data,
-            paging
-        }), {
-            status: 200
+        return new NextResponse(JSON.stringify({data: blogList, paging}), {
+            status: 200,
+            headers: {"Content-Type": "application/json"}
         });
     } catch (err) {
         console.log(JSON.stringify(err));
         const error = {
             code: 500,
-            message: err?.raw?.message ?? "Internal server error"
+            message: "Internal server error"
         }
-        return new NextResponse(JSON.stringify(error), {
-            status: 500
-        });
+        return new NextResponse(JSON.stringify(error), {status: 500});
     }
 }

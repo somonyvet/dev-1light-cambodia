@@ -8,16 +8,16 @@ const Contact = async () => {
 
     return <section className="section pt-[140px]">
         <div className="container text-center">
-            <h1 className="font-primary font-bold" data-aos="fade-right">Connect with</h1>
-            <h1 className="bg-gradient text-transparent bg-clip-text" data-aos="fade-left" data-aos-delay={100}>1Light Cambodia</h1>
+            <h1 className="font-primary font-bold" data-aos="fade-up">Connect with</h1>
+            <h1 className="bg-gradient text-transparent bg-clip-text" data-aos="fade-up" data-aos-delay={100}>1Light Cambodia</h1>
 
             <div className="section row pb-0">
                 <div className="content col-12 md:col-6 lg:col-5 md:text-start md:ps-5 md:order-2">
-                    <h4 className="md:mt-0" data-aos="fade-left" data-aos-delay={200}>{info.title}</h4>
-                    <p className="mt-4" data-aos="fade-left" data-aos-delay={300}>{info.description}</p>
+                    <h4 className="md:mt-0" data-aos="fade-up" data-aos-delay={200}>{info.title}</h4>
+                    <p className="mt-4" data-aos="fade-up" data-aos-delay={300}>{info.description}</p>
                     <ul className="contact-list mt-5">
                         {info.contacts.map((contact: any, index: number) => (
-                            <li key={index} data-aos="fade-left" data-aos-delay={(index + 4) * 100}>
+                            <li key={index} data-aos="fade-up" data-aos-delay={(index + 4) * 100}>
                                 {markdownify(contact, "strong", "text-dark")}
                             </li>
                         ))}

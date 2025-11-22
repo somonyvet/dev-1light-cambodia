@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const HomeDonation = ({donation}) => {
     return <div className="relative">
@@ -7,10 +8,10 @@ const HomeDonation = ({donation}) => {
         <div className="section bg-white/50 backdrop-blur-lg z-[1]">
             <div className="container">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:items-center">
-                    <div className="text-center md:text-start order-2 md:order-1" data-aos="fade-left">
+                    <div className="text-center md:text-start order-2 md:order-1" data-aos="fade-up">
                         <h1 className="inline-block font-primary font-bold bg-gradient text-transparent bg-clip-text">{donation.title}</h1>
                         <p className="my-4 text-base md:text-lg lg:text-xl">{donation.description}</p>
-                        <button className="btn btn-primary rounded-full">Donate Now</button>
+                        <Link href="/donation" className="btn btn-primary rounded-full">Donate Now</Link>
                     </div>
                     <div className="text-center relative inline-block w-2/3 aspect-square order-1 md:order-2" data-aos="zoom-in">
                         <Image

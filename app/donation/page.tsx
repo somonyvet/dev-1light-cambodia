@@ -16,8 +16,8 @@ const DonationPage = async () => {
         <section className="section pt-[140px]">
             <div className="container text-center">
                 <div className="w-full md:w-3/4 mx-auto">
-                    <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-right">{donation.title}</h1>
-                    <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-left" data-aos-delay={100}>{donation.description}</p>
+                    <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{donation.title}</h1>
+                    <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{donation.description}</p>
                 </div>
             </div>
             <Donation donationBlogs={DonationDescBlogs}/>

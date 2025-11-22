@@ -128,8 +128,8 @@ const Donation = ({donationBlogs}) => {
     }, [show, qr, paymentStatus, amount]);
 
     return <div>
-        {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center px-3">
-            <div className="mx-auto w-full max-w-[768px] bg-white rounded-2xl z-20">
+        {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center sm:px-3">
+            <div className="mx-auto w-full max-w-[768px] bg-white sm:rounded-2xl z-20 sm:h-auto h-screen content-center">
                 <SimpleBar style={{maxHeight: "90vh"}}>
                     <div className="min-h-[600px] h-auto flex flex-col gap-3 px-3">
                         <button className="mt-3 block bg-stone-100 hover:bg-stone-200 transition-all duration-150 p-2 sm:p-3 rounded-md ml-auto mr-0" onClick={() => setShow(false)}>
@@ -214,7 +214,7 @@ const Donation = ({donationBlogs}) => {
                                     <button
                                         onClick={generateBakongKhQr}
                                         disabled={amount <= 0 || loading || !donorName || donorName.length < 2}
-                                        className="h-[50px] flex gap-2 justify-center items-center w-full btn btn-primary my-4 rounded-lg after:rounded-lg hover:after:scale-[1.01]">
+                                        className="h-[50px] flex gap-2 justify-center items-center w-full btn btn-primary my-4 rounded-lg hover:scale-[1.02]">
                                         {loading && <div className="w-7 h-auto">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#FFFFFF" /><stop offset=".3" stopColor="#FFFFFF" stopOpacity=".9" /><stop offset=".6" stopColor="#FFFFFF" stopOpacity=".6" /><stop offset=".8" stopColor="#FFFFFF" stopOpacity=".3" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite" /></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#FFFFFF" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70" /></svg>
                                         </div>}
