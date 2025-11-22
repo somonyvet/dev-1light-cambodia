@@ -6,7 +6,8 @@ import {IoCloseSharp, IoShareSocial} from "react-icons/io5";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import {BlogProps} from "@partials/Blogs";
 import moment from "moment";
-import {useRouter} from "next/navigation";
+import NotFound from "@layouts/404";
+import {markdownify} from "@lib/utils/textConverter";
 
 interface Props {
     id?: string;
@@ -17,8 +18,6 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
     const [data, setData] = useState<BlogProps>();
     const [show, setShow] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
-    const router = useRouter();
-    console.log(router, "router in detail page");
 
     const onViewImage = (index: number) => {
         setActiveIndex(index);
@@ -67,6 +66,15 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
                 document.body.style.overflowY = "auto";
         }
     }, [show]);
+
+    if (!data)
+        return <div className="container">
+            <div className="flex h-[40vh] items-center justify-center">
+                <div className="text-center">
+                    <h1 className="mb-4">Blog Not Found</h1>
+                </div>
+            </div>
+        </div>
 
     return (
         <div className="container text-center">

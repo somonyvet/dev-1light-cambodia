@@ -6,6 +6,7 @@ import HomeBlogs from "@partials/HomeBlogs";
 import {getListPage} from "@lib/contentParser";
 import HomeValue from "@partials/HomeValue";
 import HomeDonation from "@partials/HomeDonation";
+import ContentWrapper from "@partials/ContentWrapper";
 
 const HomePage = async () => {
     const homePage = await getListPage("content/_index.md");
@@ -17,20 +18,22 @@ const HomePage = async () => {
         <div className="w-full overflow-hidden">
             <SeoMeta title={title}/>
 
-            {/* Hero */}
-            <HomeHero hero={hero}/>
+            <ContentWrapper>
+                {/* Hero */}
+                <HomeHero hero={hero}/>
 
-            {/* Value/Trust */}
-            <HomeValue value={value}/>
+                {/* Value/Trust */}
+                <HomeValue value={value}/>
 
-            {/* Blogs */}
-            <HomeBlogs blog={blog}/>
+                {/* Blogs */}
+                <HomeBlogs blog={blog}/>
 
-            {/* Donation */}
-            <HomeDonation donation={donation}/>
+                {/* Donation */}
+                <HomeDonation donation={donation}/>
 
-            {/* Cta */}
-            <Cta cta={call_to_action}/>
+                {/* Cta */}
+                <Cta cta={call_to_action}/>
+            </ContentWrapper>
         </div>
     )
 }

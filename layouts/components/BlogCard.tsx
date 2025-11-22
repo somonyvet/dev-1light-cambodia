@@ -35,7 +35,7 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, slug, content, date, onClick
             {loading && <>
                 <div className="absolute bg-stone-50/50 w-full h-full left-0 top-0 z-[1]"></div>
                 <div className="absolute w-[12%] aspect-square z-[2] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <Image src="/icons/spinner-loading.svg" alt="loading-spinner" width={20} height={20} className="w-full h-auto"/>
+                    <Image src="/icons/tube-spinner-loading.svg" alt="loading-spinner" width={20} height={20} className="w-full h-auto"/>
                 </div>
             </>}
             <Image src={imageLoading ? "/images/blank-image-placeholder.jpg" : thumbnail} alt="blog-thumbnail" fill className="object-cover transition-all duration-150 w-full" onLoadingComplete={() => setImageLoading(false)}/>

@@ -6,7 +6,7 @@ function Cta({cta}) {
     return (
         <section className="section px-4 pt-5 md:pt-10" data-aos="fade-up">
             <div className="section py-[70px] container rounded-xl shadow transition-all duration-300 hover:scale-105">
-                <div className="row mx-auto items-center justify-center">
+                <div className="row mx-auto items-center justify-center gap-10">
                     <div className="md:col-5 lg:col-4">
                         <Image
                             className="w-full"

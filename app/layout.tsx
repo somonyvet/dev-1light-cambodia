@@ -8,7 +8,7 @@ import "../styles/style.scss";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
-    title: "1Light Cambodia",
+    title: "1Light World",
     description: "Raising mental heath awareness for Beauty Pageant",
 }
 

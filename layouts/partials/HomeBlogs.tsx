@@ -5,14 +5,34 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import Link from "next/link";
 import {Autoplay, Pagination} from "swiper";
 import Image from "next/image";
+import {useEffect, useState} from "react";
+import {BlogProps} from "@partials/Blogs";
+import {useLoading} from "../../services/loading.service";
 
 const HomeBlogs = ({blog}) => {
+    const {onSetIsLoading} = useLoading();
+    const [blogs, setBlogs] = useState<BlogProps[]>([]);
+
+    useEffect(() => {
+        onSetIsLoading(true);
+        fetch("/api/blogs", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(res => res.json()).then(data => {
+            setBlogs(data.data.slice(0, 2));
+        }).catch(err => console.log(err)).finally(() => onSetIsLoading(false))
+
+        // eslint-disable-next-line
+    }, []);
+
     return <div>
         <div className="text-center">
             <div className="coatainer mx-auto lg:col-10" data-aos="fade-up">
                 <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{blog.title}</h1>
             </div>
-            {blog?.blogs.map((blog: any, index: number) => {
+            {blogs.map((blog: BlogProps, index: number) => {
                 const isOdd = index % 2 !== 0;
                 return (
                     <section
@@ -32,12 +52,11 @@ const HomeBlogs = ({blog}) => {
                                             delay: 5000,
                                             disableOnInteraction: false,
                                         }}
-                                        init={blog?.images <= 1}
                                     >
                                         {/* Slides */}
-                                        {blog?.images.map((slide: string, index: number) => (
-                                            <SwiperSlide key={index}>
-                                                <Image src={`${slide}`} alt="" width={600} height={500}/>
+                                        {blog.images.map((slide: string, index: number) => (
+                                            <SwiperSlide key={index} className="aspect-[3/2] overflow-hidden relative">
+                                                <Image src={`${slide}`} alt="" className="object-cover" fill/>
                                             </SwiperSlide>
                                         ))}
                                     </Swiper>
@@ -51,27 +70,24 @@ const HomeBlogs = ({blog}) => {
                                     }`}
                                 >
                                     <h2 className="font-bold leading-[40px]">
-                                        {blog.title[0]}
                                         <span
-                                            className="text-transparent bg-gradient bg-clip-text"> {blog.title[1]}</span>
+                                            className="text-transparent bg-gradient bg-clip-text"> {blog.title}</span>
                                     </h2>
-                                    <p className="mb-2 mt-4">{blog?.content}</p>
-                                    {blog.button.enable && (
-                                        <Link
-                                            href={blog?.button.link}
-                                            className="cta-link inline-flex items-center"
-                                        >
-                                            {blog?.button.label}
-                                            <Image
-                                                className="ml-1"
-                                                src="/images/arrow-right.svg"
-                                                width={18}
-                                                height={18}
-                                                alt="arrow"
-                                                priority
-                                            />
-                                        </Link>
-                                    )}
+                                    <div className="mb-2 mt-4 overflow-hidden truncate line-clamp-3" dangerouslySetInnerHTML={{__html: blog.content}}></div>
+                                    <Link
+                                        href={`/blogs/${blog.id}`}
+                                        className="cta-link inline-flex items-center"
+                                    >
+                                        Read more
+                                        <Image
+                                            className="ml-1"
+                                            src="/images/arrow-right.svg"
+                                            width={18}
+                                            height={18}
+                                            alt="arrow"
+                                            priority
+                                        />
+                                    </Link>
                                 </div>
                             </div>
                         </div>
