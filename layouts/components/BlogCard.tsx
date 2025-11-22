@@ -22,17 +22,15 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, slug, content, date, onClick
 
     const handleClick = () => {
         setLoading(true);
-        setTimeout(() => {
-            if (!loading) {
-                if (onClick)
-                    onClick();
-                else
-                    router.push(`/blogs/${id}`);
-            }
-        }, 1000)
+        if (!loading) {
+            if (onClick)
+                onClick();
+            else
+                router.push(`/blogs/${id}`);
+        }
     }
 
-    return <div className={`w-full flex flex-col ${view === "horizontal" && "md:flex-row"} shadow ${loading ? "cursor-progress" : "transition-all duration-100 cursor-pointer hover:shadow-2xl hover:scale-[0.97]"}`} onClick={handleClick}>
+    return <div className={`w-full flex flex-col ${view === "horizontal" && "md:flex-row"} shadow ${loading ? "cursor-progress" : "transition-all duration-150 cursor-pointer hover:shadow-2xl hover:-translate-y-1"}`} onClick={handleClick}>
         <div className={`relative overflow-hidden aspect-[4/2.5] ${view === "horizontal" ? "w-full md:w-[35%]" : "w-full"}`}>
             {loading && <>
                 <div className="absolute bg-stone-50/50 w-full h-full left-0 top-0 z-[1]"></div>
