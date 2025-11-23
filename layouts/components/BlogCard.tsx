@@ -8,14 +8,13 @@ interface Props {
     id: string;
     thumbnail: string;
     title: string;
-    slug?: string;
     content?: string;
     date: string | number;
     onClick?: () => void;
     view?: "horizontal" | "vertical";
 }
 
-const BlogCard: FC<Props> = ({id, thumbnail, title, slug, content, date, onClick, view = "vertical"}) => {
+const BlogCard: FC<Props> = ({id, thumbnail, title, content, date, onClick, view = "vertical"}) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [imageLoading, setImageLoading] = useState<boolean>(true);
     const router = useRouter();

@@ -6,8 +6,6 @@ import {IoCloseSharp, IoShareSocial} from "react-icons/io5";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import {BlogProps} from "@partials/Blogs";
 import moment from "moment";
-import NotFound from "@layouts/404";
-import {markdownify} from "@lib/utils/textConverter";
 
 interface Props {
     id?: string;

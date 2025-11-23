@@ -15,7 +15,7 @@ export interface BlogProps {
     updatedAt: number | null;
 }
 
-const Blogs = ({blogs}) => {
+const Blogs = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [firstBlog, setFirstBlog] = useState<BlogProps>();
     const [restBlogs, setRestBlogs] = useState<BlogProps[]>([]);
