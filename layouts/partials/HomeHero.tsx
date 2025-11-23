@@ -4,6 +4,7 @@ import {markdownify} from "@lib/utils/textConverter";
 import Link from "next/link";
 import Image from "next/image";
 import {useRef, useState} from "react";
+import {HomeHeroVideo} from "../../constants/medias";
 
 const HomeHero = ({hero}) => {
     const [muted, setMuted] = useState<boolean>(true);
@@ -36,7 +37,7 @@ const HomeHero = ({hero}) => {
                         </div>
                         <div className="mt-12 relative" data-aos="fade-up" data-aos-delay={300}>
                             <video className="w-full h-auto rounded-xl" loop autoPlay muted={muted} ref={videoRef}>
-                                <source src="/videos/home-hero-vdo.MP4" type="video/mp4"/>
+                                <source src={HomeHeroVideo} type="video/mp4"/>
                             </video>
                             <button className="z-10 absolute w-10 h-10 rounded-full right-3 bottom-3 border-0 bg-dark/50 text-center content-center p-0 hover:bg-dark/75" onClick={onToggleAudio}>
                                 <Image src={muted ? "/icons/unmuted.svg" : "/icons/muted.svg"} alt="mute-control" width={20} height={20} className="mx-auto"/>

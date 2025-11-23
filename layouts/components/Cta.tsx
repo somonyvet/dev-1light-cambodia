@@ -1,5 +1,6 @@
 import {markdownify} from "@lib/utils/textConverter";
 import Link from "next/link";
+import {HomeContactVideo} from "../../constants/medias";
 
 function Cta({cta}) {
     return (
@@ -15,7 +16,7 @@ function Cta({cta}) {
                         {/*    height={206}*/}
                        {/*/>*/}
                         <video muted autoPlay className="w-full rounded-xl" loop>
-                            <source src="/videos/contact-vdo.MP4" type="video/mp4"/>
+                            <source src={HomeContactVideo} type="video/mp4"/>
                         </video>
                     </div>
                     <div className="mt-5 text-center md:col-6 lg:col-5 md:mt-0 md:text-left">
