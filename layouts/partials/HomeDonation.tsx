@@ -15,11 +15,13 @@ const HomeDonation = ({donation}) => {
                     </div>
                     <div className="text-center relative inline-block w-2/3 aspect-square order-1 md:order-2" data-aos="zoom-in">
                         <Image
-                            src="https://images.gofundme.com/Wi85XKIjoTCNQ2VPs5wxKg7aiww=/720x480/https://d2g8igdw686xgo.cloudfront.net/69245745_1668079603293287_r.jpeg"
+                            // src="https://images.gofundme.com/Wi85XKIjoTCNQ2VPs5wxKg7aiww=/720x480/https://d2g8igdw686xgo.cloudfront.net/69245745_1668079603293287_r.jpeg"
+                            src="/images/home-donation-1.jpg"
                             alt="donation-img" width={300} height={300}
                             className="w-full h-auto object-cover rounded-2xl cursor-pointer transition-all duration-150 ease-linear hover:scale-105 hover:-translate-y-2 hover:z-[1] aspect-square relative left-1/2 bottom-1/2"/>
                         <Image
-                            src="https://images.gofundme.com/ZCXv1RT3f4PdUqy9U3Oz2yAEUCA=/1200x900/https://d2g8igdw686xgo.cloudfront.net/31005524_1530556289357796_r.jpg"
+                            // src="https://images.gofundme.com/ZCXv1RT3f4PdUqy9U3Oz2yAEUCA=/1200x900/https://d2g8igdw686xgo.cloudfront.net/31005524_1530556289357796_r.jpg"
+                            src="/images/home-donation-2.jpg"
                             alt="donation-img" width={300} height={300}
                             className="absolute left-0 top-0 w-full h-auto object-cover rounded-2xl cursor-pointer transition-all duration-150 ease-linear hover:scale-105 hover:-translate-y-2 hover:z-[1] aspect-square"/>
                     </div>

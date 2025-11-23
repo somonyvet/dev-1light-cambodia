@@ -29,7 +29,7 @@ const Blogs = ({blogs}) => {
             }
         }).then(res => res.json()).then(data => {
             setFirstBlog(data.data[0]);
-            setRestBlogs(data.data.slice(1));
+            setRestBlogs(data.data.slice(0));
         }).catch(err => console.log(err)).finally(() => setLoading(false))
     }, []);
 

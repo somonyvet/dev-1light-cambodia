@@ -37,7 +37,7 @@ const HomeBlogs = ({blog}) => {
                 return (
                     <section
                         key={`blog-${index}`}
-                        className={`section ${index === 0 && "pt-8"} ${isOdd && "bg-theme-light"}`}
+                        className={`section ${index === 0 && "pt-12"} ${isOdd && "bg-theme-light"}`}
                     >
                         <div className="container">
                             <div className="items-center gap-8 md:grid md:grid-cols-2">
@@ -55,7 +55,7 @@ const HomeBlogs = ({blog}) => {
                                     >
                                         {/* Slides */}
                                         {blog.images.map((slide: string, index: number) => (
-                                            <SwiperSlide key={index} className="aspect-[3/2] overflow-hidden relative">
+                                            <SwiperSlide key={index} className="aspect-[3/2] overflow-hidden relative rounded-xl">
                                                 <Image src={`${slide}`} alt="" className="object-cover" fill/>
                                             </SwiperSlide>
                                         ))}
@@ -73,7 +73,7 @@ const HomeBlogs = ({blog}) => {
                                         <span
                                             className="text-transparent bg-gradient bg-clip-text"> {blog.title}</span>
                                     </h2>
-                                    <div className="mb-2 mt-4 overflow-hidden truncate line-clamp-3" dangerouslySetInnerHTML={{__html: blog.content}}></div>
+                                    <div className="mb-2 mt-4" dangerouslySetInnerHTML={{__html: blog.content}}></div>
                                     <Link
                                         href={`/blogs/${blog.id}`}
                                         className="cta-link inline-flex items-center"

@@ -1,5 +1,4 @@
 import {markdownify} from "@lib/utils/textConverter";
-import Image from "next/image";
 import Link from "next/link";
 
 function Cta({cta}) {
@@ -8,13 +7,16 @@ function Cta({cta}) {
             <div className="section py-[70px] container rounded-xl shadow transition-all duration-300 hover:scale-105">
                 <div className="row mx-auto items-center justify-center gap-10">
                     <div className="md:col-5 lg:col-4">
-                        <Image
-                            className="w-full"
-                            src={cta?.image}
-                            alt="call to action image"
-                            width={325}
-                            height={206}
-                        />
+                        {/*<Image*/}
+                        {/*    className="w-full"*/}
+                        {/*    src={cta?.image}*/}
+                        {/*    alt="call to action image"*/}
+                        {/*    width={325}*/}
+                        {/*    height={206}*/}
+                       {/*/>*/}
+                        <video muted autoPlay className="w-full rounded-xl" loop>
+                            <source src="/videos/contact-vdo.MP4" type="video/mp4"/>
+                        </video>
                     </div>
                     <div className="mt-5 text-center md:col-6 lg:col-5 md:mt-0 md:text-left">
                         <h2>{cta?.title[0]}</h2>

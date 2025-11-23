@@ -30,9 +30,11 @@ import {
     IoLogoYoutube,
     IoMail,
 } from "react-icons/io5";
+import {RiTelegram2Fill} from "react-icons/ri";
 
 const Social = ({source, className}) => {
     const {
+        telegram,
         facebook,
         twitter,
         instagram,
@@ -66,6 +68,18 @@ const Social = ({source, className}) => {
     } = source;
     return (
         <ul className={className}>
+            {telegram && (
+                <li className="inline-block">
+                    <a
+                        aria-label="telegram"
+                        href={telegram}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                    >
+                        <RiTelegram2Fill/>
+                    </a>
+                </li>
+            )}
             {facebook && (
                 <li className="inline-block">
                     <a

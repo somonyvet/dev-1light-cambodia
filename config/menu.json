@@ -11,10 +11,6 @@
     {
       "name": "Donation",
       "url": "/donation"
-    },
-    {
-      "name": "Contact",
-      "url": "/contact"
     }
   ],
   "footer": [
