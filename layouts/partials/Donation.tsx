@@ -13,6 +13,7 @@ import QRCode from "react-qr-code";
 import {MdOutlinePayment} from "react-icons/md";
 import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
+import {Content} from "next/font/google";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
@@ -22,6 +23,11 @@ interface BakongProps {
     md5: string;
     qr: string;
 }
+
+const ContentFst = Content({
+    weight:"400",
+    subsets: ["khmer"]
+})
 
 const DonationAmountOptions = [5, 10, 20, 25, 50, 100];
 
@@ -239,7 +245,7 @@ const Donation = ({donationBlogs}) => {
                 className="mx-auto w-[95%] md:w-[90%] lg:w-[80%] flex flex-col md:flex-row gap-5 justify-center items-center relative -top-[100px]">
                 {donationBlogs.map((desc: string, index: number) => (
                     <div key={index}
-                         className={`p-4 rounded-2xl bg-white content-center cursor-pointer transition-all duration-150 hover:shadow-2xl hover:text-black w-full ${index !== activeIndex ? "h-[140px] shadow" : "h-auto scale-105 text-black shadow-xl"}`}
+                         className={`text-center p-4 rounded-2xl bg-white content-center cursor-pointer transition-all duration-400 hover:shadow-2xl hover:text-black w-full ${index !== activeIndex ? "h-[140px] shadow" : "h-auto scale-105 text-black shadow-xl "} ${!index && ContentFst.className}`}
                          onClick={() => setActiveIndex(index)}>
                         <p className={`overflow-hidden ${index !== activeIndex && "line-clamp-3"}`}>{desc}</p>
                     </div>

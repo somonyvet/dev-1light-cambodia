@@ -16,7 +16,9 @@
   "fonts": {
     "font_family": {
       "primary": "Rubik:wght@300;400;700",
-      "primary_type": "sans-serif"
+      "primary_type": "sans-serif",
+      "secondary": "Content:wght@300;400;700",
+      "secondary_type": "system-ui"
     },
     "font_size": {
       "base": "16",
