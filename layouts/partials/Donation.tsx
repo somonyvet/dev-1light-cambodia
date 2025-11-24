@@ -13,7 +13,7 @@ import QRCode from "react-qr-code";
 import {MdOutlinePayment} from "react-icons/md";
 import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
-import {Content} from "next/font/google";
+import {Suwannaphum} from "next/font/google";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
@@ -24,8 +24,8 @@ interface BakongProps {
     qr: string;
 }
 
-const ContentFst = Content({
-    weight:"400",
+const ContentFst = Suwannaphum({
+    weight: "400",
     subsets: ["khmer"]
 })
 
@@ -137,7 +137,7 @@ const Donation = ({donationBlogs}) => {
     return <div>
         {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center sm:px-3">
             <div className="mx-auto w-full max-w-[768px] bg-white sm:rounded-2xl z-20 sm:h-auto h-screen content-center">
-                <SimpleBar style={{maxHeight: "90vh"}}>
+                <SimpleBar className="max-h-screen md:max-h-[90vh]">
                     <div className="min-h-[600px] h-auto flex flex-col gap-3 px-3">
                         <button className="mt-3 block bg-stone-100 hover:bg-stone-200 transition-all duration-150 p-2 sm:p-3 rounded-md ml-auto mr-0" onClick={() => setShow(false)}>
                             <IoCloseSharp/>

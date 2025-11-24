@@ -9,7 +9,7 @@ import config from "../../config/config.json";
 import {checkIsActive} from "@lib/utils/route";
 
 const Header = () => {
-    const [navOpen, setNavOpen] = useState(false);
+    const [navOpen, setNavOpen] = useState<boolean>(false);
     const pathname = usePathname();
     const {main} = menu as any;
     const {logo} = config.site;
