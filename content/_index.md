@@ -1,7 +1,7 @@
 ---
 hero:
-  title: Beyond the Stage - Mental Strength for Every Titleholder.
-  content: Access expert guidance and real-life stories to manage pressure, navigate social media, and thrive during and after your pageant journey.
+  title: Lighting Hope. Healing Minds. Changing Lives.
+  content: Providing mental-health support, guidance, and real stories to help individuals rebuild confidence, emotional strength, and a healthier future.
   image: /images/home-hero.jpg
   ctaButtons:
   - enable: true

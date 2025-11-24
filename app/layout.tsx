@@ -14,6 +14,7 @@ export const metadata = {
 
 export default function RootLayout({children}) {
     const pf = theme.fonts.font_family.primary;
+    const sf = theme.fonts.font_family.secondary;
 
     return (
         <html suppressHydrationWarning={true} lang="en">
@@ -37,6 +38,10 @@ export default function RootLayout({children}) {
             />
             <link
                 href={`https://fonts.googleapis.com/css2?family=${pf}&display=swap`}
+                rel="stylesheet"
+            />
+            <link
+                href={`https://fonts.googleapis.com/css2?family=${sf}&display=swap`}
                 rel="stylesheet"
             />
 
