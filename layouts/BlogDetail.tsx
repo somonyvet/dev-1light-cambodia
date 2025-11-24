@@ -6,8 +6,6 @@ import {IoCloseSharp, IoShareSocial} from "react-icons/io5";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import {BlogProps} from "@partials/Blogs";
 import moment from "moment";
-import NotFound from "@layouts/404";
-import {markdownify} from "@lib/utils/textConverter";
 
 interface Props {
     id?: string;
@@ -16,8 +14,9 @@ interface Props {
 
 const BlogDetail: FC<Props> = ({id, blog}) => {
     const [data, setData] = useState<BlogProps>();
-    const [show, setShow] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [show, setShow] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [activeIndex, setActiveIndex] = useState<number>(0);
 
     const onViewImage = (index: number) => {
         setActiveIndex(index);
@@ -48,7 +47,7 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
             setData(data.data.blog);
         }).catch(err => {
             console.log(err);
-        })
+        }).finally(() => setLoading(false))
 
         // eslint-disable-next-line
     }, []);
@@ -67,7 +66,7 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
         }
     }, [show]);
 
-    if (!data)
+    if (!data && !loading)
         return <div className="container">
             <div className="flex h-[40vh] items-center justify-center">
                 <div className="text-center">
@@ -88,7 +87,7 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
                     </button>
                 </div>
                 <div>
-                    <Image src={data.thumbnail} alt="thumbnail" width={100} height={100} className="w-full aspect-[2/1] object-cover" blurDataURL={data.thumbnail} placeholder="blur"/>
+                    <Image src={data.thumbnail} alt="thumbnail" width={100} height={100} className="w-full aspect-[2/1] object-cover rounded-xl" blurDataURL={data.thumbnail} placeholder="blur"/>
                     <div className="mt-3 flex gap-3 overflow-x-auto">
                         {data.images.map((image: string, index: number) => (
                             <div key={index}

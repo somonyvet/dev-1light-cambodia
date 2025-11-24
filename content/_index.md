@@ -2,7 +2,7 @@
 hero:
   title: Beyond the Stage - Mental Strength for Every Titleholder.
   content: Access expert guidance and real-life stories to manage pressure, navigate social media, and thrive during and after your pageant journey.
-  image: /images/banner-art.svg
+  image: /images/home-hero.jpg
   ctaButtons:
   - enable: true
     variant: "btn-outline-primary"
@@ -20,10 +20,12 @@ value:
   actions:
     - heading: Need Help Now? 
       body: A brief, urgent message about reaching out if they are in crisis or immediate distress.
-      cta: Call a Crisis Hotline
+      cta: Chat on Telegram
+      link: https://t.me/kmusrd
     - heading: Start Your Healing Journey 
       body: A compassionate message about general well-being and seeking resources.
-      cta: Access Our Resource Library
+      cta: Visit Our Facebook Page
+      link: https://www.facebook.com/share/1CjuFdT2gU/?mibextid=wwXIfr
 
 # blogs
 blog:

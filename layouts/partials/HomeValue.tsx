@@ -1,4 +1,5 @@
 import {markdownify} from "@lib/utils/textConverter";
+import Link from "next/link";
 
 const HomeValue = ({value}) => {
     return <div className="relative">
@@ -18,7 +19,7 @@ const HomeValue = ({value}) => {
                             <div key={index} className="md:text-start" data-aos={index ? "fade-up" : "fade-up"} data-aos-delay={200}>
                                 <h3>{action.heading}</h3>
                                 <p className="my-4">{action.body}</p>
-                                <button className="btn btn-primary rounded-full">{action.cta}</button>
+                                <Link href={action.link} target="_blank" className="btn btn-primary rounded-full">{action.cta}</Link>
                             </div>
                         ))}
                     </div>

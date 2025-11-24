@@ -77,7 +77,7 @@ const Donation = ({donationBlogs}) => {
 
     const generateBakongKhQr = async () => {
         setLoading(true);
-        await fetch("/api/generate-khqr", {
+        await fetch("https://blog.serssetec.uk/api/generate-khqr", {
             method: "POST",
             body: JSON.stringify({donorName, amount})
         }).then(res => res.json()).then((data) => {
@@ -86,7 +86,8 @@ const Donation = ({donationBlogs}) => {
             setLoading(false);
             setSessionItem(TIMESTAMP_KEY, JSON.stringify(data.timestamp));
             setTimestamp(data.timestamp);
-        }).catch(() => {
+        }).catch((err) => {
+            console.log(err, "err for generating khqr");
             setLoading(false);
         });
     }
@@ -108,7 +109,7 @@ const Donation = ({donationBlogs}) => {
     useEffect(() => {
         if (show && amount && qr && !paymentStatus) {
             const interval = setInterval(() => {
-                fetch("/api/check-bakong-transaction", {
+                fetch("https://blog.serssetec.uk/api/check-bakong-transaction", {
                     method: "POST",
                     body: JSON.stringify({donorName, md5: qr.md5})
                 }).then(res => res.json()).then(data => {
@@ -228,7 +229,9 @@ const Donation = ({donationBlogs}) => {
             </div>
         </div>}
         <div className="pt-10 container">
-            <Image src="https://images.justgiving.com/image/fa736d52-6df6-4c63-9bc5-ba7fff4c2b01.jpg"
+            <Image
+                src="/images/home-hero.jpg"
+                   // src="https://images.justgiving.com/image/fa736d52-6df6-4c63-9bc5-ba7fff4c2b01.jpg"
                    alt="donation-banner" className="w-full aspect-[2/1] object-cover rounded-2xl" width={100}
                    height={100} data-aos="zoom-in" data-aos-delay={500}/>
             <div

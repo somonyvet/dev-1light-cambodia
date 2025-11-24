@@ -1,6 +1,5 @@
 import {getListPage} from "@lib/contentParser";
 import Blogs from "@partials/Blogs";
-import {blogs} from "../../content/blogs/_index";
 import config from "@config/config.json";
 import SeoMeta from "@layouts/SeoMeta";
 
@@ -19,7 +18,7 @@ const BlogPage = async () => {
                 <div className="container">
                     <h1 className="h1 text-center font-bold font-primary text-transparent bg-gradient bg-clip-text" data-aos="fade-up">{titles[0]}</h1>
                     <h2 className="h2 text-center font-bold font-primary" data-aos="fade-up" data-aos-delay={100}>{titles[1]}</h2>
-                    <Blogs blogs={blogs}/>
+                    <Blogs/>
                 </div>
             </section>
         </>
