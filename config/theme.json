@@ -17,8 +17,8 @@
     "font_family": {
       "primary": "Rubik:wght@300;400;700",
       "primary_type": "sans-serif",
-      "secondary": "Content:wght@300;400;700",
-      "secondary_type": "system-ui"
+      "secondary": "Suwannaphum:wght@100;300;400;700;900",
+      "secondary_type": "normal"
     },
     "font_size": {
       "base": "16",
