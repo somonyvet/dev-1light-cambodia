@@ -55,5 +55,28 @@
   "readMore": "Read more",
   "blog": {
     "title": "Hear from the Grown"
+  },
+  "donation": {
+    "action": {
+      "title": "Give Support",
+      "subTitle": "Choose a payment method below to donate:",
+      "donateViaKhQr": "Donate via KHQR"
+    },
+    "modal": {
+      "gi": "General Information",
+      "guideText": "Please select the amount you want to donate",
+      "customAmount": "Custom amount",
+      "donate": "Donate",
+      "processing": "Processing...",
+      "controls": {
+        "name": {
+          "label": "Please enter your full name",
+          "placeholder": "Full name"
+        },
+        "amount": {
+          "label": "Please enter the amount you want to donate ($)"
+        }
+      }
+    }
   }
 }
