@@ -8,12 +8,16 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {BlogProps} from "@partials/Blogs";
 import {useLoading} from "../../services/loading.service";
+import {useTranslation} from "react-i18next";
 
 const HomeBlogs = ({blog}) => {
     const {onSetIsLoading} = useLoading();
     const [blogs, setBlogs] = useState<BlogProps[]>([]);
+    const [mounted, setMounted] = useState<boolean>(false);
+    const {t} = useTranslation();
 
     useEffect(() => {
+        setMounted(true);
         onSetIsLoading(true);
         fetch("/api/blogs", {
             method: "GET",
@@ -27,10 +31,12 @@ const HomeBlogs = ({blog}) => {
         // eslint-disable-next-line
     }, []);
 
+    if (!mounted) return null;
+
     return <div>
         <div className="text-center">
             <div className="coatainer mx-auto lg:col-10" data-aos="fade-up">
-                <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{blog.title}</h1>
+                <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{t(blog.title)}</h1>
             </div>
             {blogs.map((blog: BlogProps, index: number) => {
                 const isOdd = index % 2 !== 0;

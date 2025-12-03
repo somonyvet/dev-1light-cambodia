@@ -3,12 +3,15 @@
 import {markdownify} from "@lib/utils/textConverter";
 import Link from "next/link";
 import Image from "next/image";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {HomeHeroVideo} from "../../constants/medias";
+import {useTranslation} from "react-i18next";
 
 const HomeHero = ({hero}) => {
+    const [mounted, setMounted] = useState<boolean>(false);
     const [muted, setMuted] = useState<boolean>(true);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const {t} = useTranslation();
 
     const onToggleAudio = () => {
         if (muted && videoRef.current)
@@ -16,13 +19,19 @@ const HomeHero = ({hero}) => {
         setMuted(!muted);
     }
 
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return (
         <section className="section pt-[140px]">
             <div className="container">
                 <div className="row md:text-center">
                     <div className="mx-auto lg:col-10">
-                        <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{hero.title}</h1>
-                        <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{markdownify(hero.content)}</p>
+                        <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{t(hero.title)}</h1>
+                        <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{markdownify(t(hero.content))}</p>
                         <div className="mt-4 flex gap-2 md:gap-5 md:justify-center">
                             {hero.ctaButtons.map((btn: any, index: number) => (
                                 <div key={index} data-aos={index ? "fade-up" :"fade-up"} data-aos-delay={200}>
@@ -30,7 +39,7 @@ const HomeHero = ({hero}) => {
                                         className={`btn ${btn.variant}`}
                                         href={btn.link}
                                     >
-                                        {btn.label}
+                                        {t(btn.label)}
                                     </Link>
                                 </div>
                             ))}

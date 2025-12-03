@@ -1,35 +1,35 @@
 ---
 hero:
-  title: Lighting Hope. Healing Minds. Changing Lives.
-  content: Providing mental-health support, guidance, and real stories to help individuals rebuild confidence, emotional strength, and a healthier future.
+  title: home.hero.title
+  content: home.hero.subTitle
   image: /images/home-hero.jpg
   ctaButtons:
   - enable: true
     variant: "btn-outline-primary"
-    label: "Donate Us"
+    label: home.hero.cta.donate
     link: "/donation"
   - enable: true
     variant: "btn-primary"
-    label: "Contact Us"
+    label: home.hero.cta.contact
     link: "/contact"
     
 # value/trust section
 value:
-  title: We See You.
-  subTitle: The pressure of the crown is real. Here are the first steps to finding support and prioritizing your mental well-being.
+  title: home.value.title
+  subTitle: home.value.subTitle
   actions:
-    - heading: Need Help Now? 
-      body: A brief, urgent message about reaching out if they are in crisis or immediate distress.
-      cta: Chat on Telegram
+    - heading: home.value.actions.item1.heading
+      body: home.value.actions.item1.body
+      cta: home.value.actions.item1.cta
       link: https://t.me/kmusrd
-    - heading: Start Your Healing Journey 
-      body: A compassionate message about general well-being and seeking resources.
-      cta: Visit Our Facebook Page
+    - heading: home.value.actions.item2.heading
+      body: home.value.actions.item2.body
+      cta: home.value.actions.item2.cta
       link: https://www.facebook.com/share/1CjuFdT2gU/?mibextid=wwXIfr
 
 # blogs
 blog:
-  title: "Stories of Resilience"
+  title: home.blog.title
   blogs: 
     - title:
         - "The Panic Attack Behind the Smile:"
@@ -56,11 +56,11 @@ blog:
         label: Read more
         link: /contact
 
-
 # donation
 donation: 
-  title: Support Our Mission
-  description: Every contribution helps us expand our confidential resource library, fund crisis hotline support, and share more stories of hope.
+  title: home.donation.title
+  description: home.donation.desc
+  cta: home.donation.cta
 
 # blogs
 services:
@@ -109,12 +109,12 @@ services:
 # call_to_action
 call_to_action:
   title:
-    - Ready to Connect?
-    - We're here to listen.
-  content: Whether you're a contestant, family member, partner organization, or media contact, we welcome your message.
+    - home.contact.title1
+    - home.contact.title2
+  content: home.contact.content
   image: '/images/cta.svg'
   button:
     enable: true
-    label: "Contact Us"
+    label: home.hero.cta.contact
     link: "/contact"
 ---

@@ -11,5 +11,44 @@
     "pages": "Pages",
     "support": "Support",
     "faq": "FAQ"
+  },
+  "home": {
+    "hero": {
+      "title": "Lighting Hope. Healing Minds. Changing Lives.",
+      "subTitle": "Providing mental-health support, guidance, and real stories to help individuals rebuild confidence, emotional strength, and a healthier future.",
+      "cta": {
+        "donate": "Donate Us",
+        "contact": "Contact Us"
+      }
+    },
+    "value": {
+      "title": "We See You.",
+      "subTitle": "The pressure of the crown is real. Here are the first steps to finding support and prioritizing your mental well-being.",
+      "actions": {
+        "item1": {
+          "heading": "Need Help Now? ",
+          "body": "A brief, urgent message about reaching out if they are in crisis or immediate distress.",
+          "cta": "Chat on Telegram"
+        },
+        "item2": {
+          "heading": "Start Your Healing Journey",
+          "body": "A compassionate message about general well-being and seeking resources.",
+          "cta": "Visit Our Facebook Page"
+        }
+      }
+    },
+    "blog": {
+      "title": "Stories of Resilience"
+    },
+    "donation": {
+      "title": "Support Our Mission",
+      "desc": "Every contribution helps us expand our confidential resource library, fund crisis hotline support, and share more stories of hope.",
+      "cta": "Donate Now"
+    },
+    "contact": {
+      "title1": "Ready to Connect?",
+      "title2": "We're here to listen.",
+      "content": "Whether you're a contestant, family member, partner organization, or media contact, we welcome your message."
+    }
   }
 }
