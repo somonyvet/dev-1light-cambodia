@@ -78,5 +78,27 @@
         }
       }
     }
+  },
+  "contact": {
+    "preTitle": "Connect with",
+    "title": "1Light World",
+    "form": {
+      "title": "Send your message to our Email",
+      "controls": {
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Your message"
+      },
+      "submit": "Send Now",
+      "sending": "Sending..."
+    },
+    "secondaryTitle": "How can we help you today?",
+    "text": "We treat every message with the utmost confidentiality and respect. Your personal information will never be shared, and your correspondence will remain secure. Use the button below to send your message securely.",
+    "phone": "Phone number",
+    "alert": {
+      "hello": "Hello",
+      "message": "You have sent your message to our email successfully. We will contact back to you through email. We will contact back to you through email. Thank!"
+    }
   }
 }
