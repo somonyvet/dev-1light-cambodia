@@ -16,9 +16,7 @@ const BlogPage = async () => {
             <SeoMeta title={title}/>
             <section className="section pt-[140px]">
                 <div className="container">
-                    <h1 className="h1 text-center font-bold font-primary text-transparent bg-gradient bg-clip-text" data-aos="fade-up">{titles[0]}</h1>
-                    <h2 className="h2 text-center font-bold font-primary" data-aos="fade-up" data-aos-delay={100}>{titles[1]}</h2>
-                    <Blogs/>
+                    <Blogs titles={titles}/>
                 </div>
             </section>
         </>

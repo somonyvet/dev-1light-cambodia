@@ -52,5 +52,8 @@
       "content": "Whether you're a contestant, family member, partner organization, or media contact, we welcome your message."
     }
   },
-  "readMore": "Read more"
+  "readMore": "Read more",
+  "blog": {
+    "title": "Hear from the Grown"
+  }
 }
