@@ -22,7 +22,7 @@ const HomeValue = ({value}) => {
             <div className="container">
                 <div className="row text-center">
                     <div className="mx-auto lg:col-10" data-aos="fade-up">
-                        <h1 className="text-black">You Are Not Alone. <span
+                        <h1 className="text-black">{t(value.preTitle)} <span
                             className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{t(value.title)}</span>
                         </h1>
                         <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{markdownify(t(value.subTitle))}</p>

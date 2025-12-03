@@ -22,11 +22,12 @@
       }
     },
     "value": {
-      "title": "We See You.",
+      "preTitle": "You are Not Alone",
+      "title": "We See You",
       "subTitle": "The pressure of the crown is real. Here are the first steps to finding support and prioritizing your mental well-being.",
       "actions": {
         "item1": {
-          "heading": "Need Help Now? ",
+          "heading": "Need Help Now?",
           "body": "A brief, urgent message about reaching out if they are in crisis or immediate distress.",
           "cta": "Chat on Telegram"
         },
@@ -50,5 +51,6 @@
       "title2": "We're here to listen.",
       "content": "Whether you're a contestant, family member, partner organization, or media contact, we welcome your message."
     }
-  }
+  },
+  "readMore": "Read more"
 }

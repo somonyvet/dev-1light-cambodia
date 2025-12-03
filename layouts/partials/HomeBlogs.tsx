@@ -83,7 +83,7 @@ const HomeBlogs = ({blog}) => {
                                         href={`/blogs/${blog.id}`}
                                         className="cta-link inline-flex items-center"
                                     >
-                                        Read more
+                                        {t("readMore")}
                                         <Image
                                             className="ml-1"
                                             src="/images/arrow-right.svg"

@@ -15,6 +15,7 @@ hero:
     
 # value/trust section
 value:
+  preTitle: home.value.preTitle
   title: home.value.title
   subTitle: home.value.subTitle
   actions:
