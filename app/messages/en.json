@@ -1,0 +1,15 @@
+{
+  "menu": {
+    "home": "Home",
+    "blog": "Blog",
+    "donation": "Donation",
+    "contact": "Contact"
+  },
+  "english": "English",
+  "khmer": "Khmer",
+  "footer": {
+    "pages": "Pages",
+    "support": "Support",
+    "faq": "FAQ"
+  }
+}

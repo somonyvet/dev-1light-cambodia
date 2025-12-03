@@ -69,9 +69,8 @@ const HomeBlogs = ({blog}) => {
                                         !isOdd && "md:order-1"
                                     }`}
                                 >
-                                    <h2 className="font-bold leading-[40px]">
-                                        <span
-                                            className="text-transparent bg-gradient bg-clip-text"> {blog.title}</span>
+                                    <h2 className="font-primary font-bold leading-[40px]">
+                                        <span className="text-transparent bg-gradient bg-clip-text"> {blog.title}</span>
                                     </h2>
                                     <div className="mb-2 mt-4" dangerouslySetInnerHTML={{__html: blog.content}}></div>
                                     <Link

@@ -1,3 +1,5 @@
+"use client";
+
 import Social from "@components/Social";
 import config from "@config/config.json";
 import menu from "@config/menu.json";
@@ -5,10 +7,20 @@ import social from "@config/social.json";
 import {markdownify} from "@lib/utils/textConverter";
 import Image from "next/image";
 import Link from "next/link";
+import {useTranslation} from "react-i18next";
+import {useEffect, useState} from "react";
 
 const Footer = () => {
+    const [mounted, setMounted] = useState<boolean>(false);
     const {copyright, footer_content} = config.params;
     const {footer} = menu;
+    const {t} = useTranslation();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     return (
         <footer className="section bg-theme-light pb-0">
@@ -18,12 +30,12 @@ const Footer = () => {
                     {footer.map((col) => {
                         return (
                             <div className="mb-12 sm:col-6 lg:col-4" key={col.name}>
-                                {markdownify(col.name, "h2", "h4")}
+                                <h4>{t(col.name)}</h4>
                                 <ul className="mt-6">
                                     {col?.menu.map((item) => (
                                         <li className="mb-1" key={item.text}>
-                                            <Link href={item.url} rel="">
-                                                {item.text}
+                                            <Link href={item.url}>
+                                                {t(item.text)}
                                             </Link>
                                         </li>
                                     ))}
