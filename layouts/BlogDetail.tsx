@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {IoCloseSharp, IoShareSocial} from "react-icons/io5";
 import {GrFormNext, GrFormPrevious} from "react-icons/gr";
 import {BlogProps} from "@partials/Blogs";
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 interface Props {
     id?: string;
@@ -15,8 +16,11 @@ interface Props {
 const BlogDetail: FC<Props> = ({id, blog}) => {
     const [data, setData] = useState<BlogProps>();
     const [show, setShow] = useState<boolean>(false);
+    const [alertShow, setAlertShow] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
+    const [mounted, setMounted] = useState<boolean>(false);
     const [activeIndex, setActiveIndex] = useState<number>(0);
+    const {t} = useTranslation();
 
     const onViewImage = (index: number) => {
         setActiveIndex(index);
@@ -37,7 +41,15 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
             setActiveIndex(activeIndex + 1);
     }
 
+    const onShare = () => {
+        if (typeof window !== "undefined") {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => setAlertShow(true));
+        }
+    }
+
     useEffect(() => {
+        setMounted(true);
         fetch(`/api/blogs/${id}`, {
             method: "GET",
             headers: {
@@ -66,24 +78,37 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
         }
     }, [show]);
 
+    useEffect(() => {
+        if (alertShow) {
+            const timeout = setTimeout(() => setAlertShow(false), 2000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [alertShow]);
+
+    if (!mounted) return null;
+
+    if (loading) return <div className="container section text-center">{t("loading")}</div>
+
     if (!data && !loading)
         return <div className="container">
             <div className="flex h-[40vh] items-center justify-center">
                 <div className="text-center">
-                    <h1 className="mb-4">Blog Not Found</h1>
+                    <h1 className="mb-4">{t("noContent")}</h1>
                 </div>
             </div>
         </div>
 
     return (
         <div className="container text-center">
+            {alertShow && <div className="fixed bottom-4 left-1/2 -translate-x-1/2 max-w-md text-xs sm:text-sm text-dark rounded-lg bg-body shadow-lg p-3 w-[90%] z-[999]">{t("linkCopied")}</div>}
             {data && <>
                 <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text">{data.title}</h1>
                 <div className="my-10 flex gap-5 flex-wrap justify-center items-center">
                     <p>{moment(data.createdAt).format("LLL")}</p>
-                    <button className="btn btn-outline-primary flex gap-2 py-2 px-3 items-center justify-center group">
+                    <button className="btn btn-outline-primary flex gap-2 py-2 px-3 items-center justify-center group" onClick={onShare}>
                         <IoShareSocial className="text-[#777]"/>
-                        <span>Share</span>
+                        <span>{t("share")}</span>
                     </button>
                 </div>
                 <div>

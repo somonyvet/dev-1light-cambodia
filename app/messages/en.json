@@ -104,5 +104,8 @@
       "message": "You have sent your message to our email successfully. We will contact back to you through email. We will contact back to you through email. Thank!"
     }
   },
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "noContent": "Blog not Found",
+  "share": "Share",
+  "linkCopied": "Link is copied"
 }

@@ -41,7 +41,7 @@ const Header = () => {
                         <div className="h-full bg-transparent border-0 outline-0 transition-all duration-150 p-1.5 rounded-md hover:bg-stone-200">
                             <Image src={i18n.language === "en" ? "/icons/english.svg" : "/icons/khmer.svg"} alt="lang-flag" width={24} height={24}/>
                         </div>
-                        <div className="absolute w-[150px] h-auto top-full right-0 bg-white shadow-lg rounded-lg py-3 hidden group-hover:block">
+                        <div className="absolute w-[150px] h-auto top-full right-0 bg-white shadow-lg rounded-lg py-3 hidden group-hover:block" role="alert">
                             <button className={`h-full bg-transparent border-0 outline-0 transition-all duration-150 px-3 py-2 hover:bg-stone-200 hover:pl-4 flex gap-2 items-center w-full ${i18n.language === "en" && "text-black"}`} onClick={() => onLocaleChange("en")}>
                                 <Image src="/icons/english.svg" alt="lang-flag" width={24} height={24}/>
                                 {t("english")}
@@ -146,7 +146,7 @@ const Header = () => {
                                 <Image src={i18n.language === "en" ? "/icons/english.svg" : "/icons/khmer.svg"} alt="lang-flag" width={24} height={24}/>
                                 {i18n.language === "en" ? t("english") : t("khmer")}
                             </div>
-                            <div className="absolute w-[130%] h-auto top-full right-0 bg-white shadow-lg rounded-lg py-3 hidden group-hover:block">
+                            <div className="absolute w-[130%] h-auto top-full right-0 bg-white shadow-lg rounded-lg py-3 hidden group-hover:block" role="alert">
                                 <button className={`h-full bg-transparent border-0 outline-0 transition-all duration-150 px-3 py-2 hover:bg-stone-200 hover:pl-4 flex gap-1.5 items-center w-full ${i18n.language === "en" && "text-black"}`} onClick={() => onLocaleChange("en")}>
                                     <Image src="/icons/english.svg" alt="lang-flag" width={24} height={24}/>
                                     {t("english")}
