@@ -1,6 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
 import {adminDb} from "@lib/firebaseAdmin";
-import {DonationProps} from "../../../types/donation";
 
 export async function GET(req: NextRequest) {
     try {
