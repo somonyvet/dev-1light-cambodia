@@ -43,11 +43,11 @@
           "url": "#"
         },
         {
-          "text": "Privacy Policy",
+          "text": "footer.policy",
           "url": "#"
         },
         {
-          "text": "Terms & Conditions",
+          "text": "footer.condition",
           "url": "#"
         }
       ]

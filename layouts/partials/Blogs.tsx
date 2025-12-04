@@ -45,7 +45,7 @@ const Blogs = ({titles}) => {
             <h2 className="h2 text-center font-bold font-primary" data-aos="fade-up" data-aos-delay={100}>{t(titles[1])}</h2>
             <div className="section pt-[50px]">
                 {loading ? <div className="text-center">
-                    Loading...
+                    {t("loading")}
                 </div> : <>
                     {firstBlog && <BlogCard id={firstBlog.id} title={firstBlog.title} thumbnail={firstBlog.thumbnail} date={firstBlog.createdAt} view="horizontal" content={firstBlog.content} data-aos="fade-up" data-aos-delay={200}/>}
                     <div className="mt-[70px] grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-5">

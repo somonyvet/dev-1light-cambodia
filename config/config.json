@@ -22,8 +22,7 @@
 
   "params": {
     "contact_form_action": "",
-    "tag_manager_id": "",
-    "footer_content": "Access expert guidance and real-life stories to manage pressure, navigate social media, and thrive during and after your pageant journey.",
+    "footer_content": "footer.content",
     "copyright": "Designed and Developed By 1Light World"
   },
 

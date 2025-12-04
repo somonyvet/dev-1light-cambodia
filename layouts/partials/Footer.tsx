@@ -53,7 +53,7 @@ const Footer = () => {
                                 alt=""
                             />
                         </Link>
-                        {markdownify(footer_content, "p", "mt-3 mb-6")}
+                        {markdownify(t(footer_content), "p", "mt-3 mb-6")}
                         <Social source={social} className="social-icons mb-8"/>
                     </div>
                 </div>

@@ -10,7 +10,10 @@
   "footer": {
     "pages": "Pages",
     "support": "Support",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "policy": "Privacy Policy",
+    "condition": "Terms & Conditions",
+    "content": "Access expert guidance and real-life stories to manage pressure, navigate social media, and thrive during and after your pageant journey."
   },
   "home": {
     "hero": {
@@ -100,5 +103,6 @@
       "hello": "Hello",
       "message": "You have sent your message to our email successfully. We will contact back to you through email. We will contact back to you through email. Thank!"
     }
-  }
+  },
+  "loading": "Loading..."
 }

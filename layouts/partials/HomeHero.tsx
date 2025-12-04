@@ -30,7 +30,7 @@ const HomeHero = ({hero}) => {
             <div className="container">
                 <div className="row md:text-center">
                     <div className="mx-auto lg:col-10">
-                        <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{t(hero.title)}</h1>
+                    <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text leading-20" data-aos="fade-up">{t(hero.title)}</h1>
                         <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{markdownify(t(hero.content))}</p>
                         <div className="mt-4 flex gap-2 md:gap-5 md:justify-center">
                             {hero.ctaButtons.map((btn: any, index: number) => (
