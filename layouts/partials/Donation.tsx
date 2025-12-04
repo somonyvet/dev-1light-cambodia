@@ -14,6 +14,7 @@ import {MdOutlinePayment} from "react-icons/md";
 import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
 import {Suwannaphum} from "next/font/google";
+import {useTranslation} from "react-i18next";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
@@ -36,7 +37,7 @@ const ExpiredSession = ({setQr}) => {
     return <p className="text-sm mt-6">Expired</p>
 }
 
-const Donation = ({donationBlogs}) => {
+const Donation = ({donationBlogs, donation}) => {
     const [donorName, setDonorName] = useState<string>("");
     const [activeIndex, setActiveIndex] = useState(1);
     const [show, setShow] = useState<boolean>(false);
@@ -47,6 +48,8 @@ const Donation = ({donationBlogs}) => {
     const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
     const [inputBehavior, setInputBehavior] = useState<"option" | "custom">("option");
     const [timestamp, setTimestamp] = useState<number | null>();
+    const [mounted, setMounted] = useState<boolean>(false);
+    const {t} = useTranslation();
 
     const renderer = ({minutes, seconds, completed}) => {
         if (completed)
@@ -134,7 +137,19 @@ const Donation = ({donationBlogs}) => {
         // eslint-disable-next-line
     }, [show, qr, paymentStatus, amount]);
 
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return <div>
+        <div className="container text-center">
+            <div className="w-full md:w-3/4 mx-auto">
+                <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{t(donation.title)}</h1>
+                <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{t(donation.description)}</p>
+            </div>
+        </div>
         {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center sm:px-3">
             <div className="mx-auto w-full max-w-[768px] bg-white sm:rounded-2xl z-20 sm:h-auto h-screen content-center">
                 <SimpleBar className="max-h-screen md:max-h-[90vh]">
@@ -179,9 +194,9 @@ const Donation = ({donationBlogs}) => {
                                     <div className="mb-3">
                                         <div className="mb-5 text-center">
                                             <div>
-                                                <p className="font-semibold text-dark text-lg md:text-xl">General Information</p>
+                                                <p className="font-semibold text-dark text-lg md:text-xl">{t("donation.modal.gi")}</p>
                                                 <div className="text-start my-4">
-                                                    <label htmlFor="donorName">Please enter your full name</label>
+                                                    <label htmlFor="donorName">{t("donation.modal.controls.name.label")}</label>
                                                     <input
                                                         id="donorName"
                                                         className="mt-1 form-input w-full py-2 md:py-3 rounded-lg"
@@ -189,19 +204,19 @@ const Donation = ({donationBlogs}) => {
                                                         type="text"
                                                         value={donorName}
                                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDonorName(e.target.value)}
-                                                        placeholder="Full name"
+                                                        placeholder={t("donation.modal.controls.name.placeholder")}
                                                         required
                                                     />
                                                 </div>
                                             </div>
-                                            <p className="font-semibold text-dark text-lg md:text-xl">Please select the amount you want to donate</p>
+                                            <p className="font-semibold text-dark text-lg md:text-xl">{t("donation.modal.guideText")}</p>
                                             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                                                 {DonationAmountOptions.map((option, index) => (
                                                     <div key={index} className={`p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark ${amount === option && "border-transparent ring-primary ring-2 text-black"}`} onClick={() => setAmount(option)}>{option}$</div>
                                                 ))}
                                             </div>
-                                            {inputBehavior === "option" ? <div className="mt-3 md:mt-4 p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark" onClick={() => setInputBehavior("custom")}>Custom amount</div> : <div className="mt-3 md:mt-4 text-start">
-                                                <label htmlFor="amount">Please enter the amount($) you want to donate</label>
+                                            {inputBehavior === "option" ? <div className="mt-3 md:mt-4 p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark" onClick={() => setInputBehavior("custom")}>{t("donation.modal.customAmount")}</div> : <div className="mt-3 md:mt-4 text-start">
+                                                <label htmlFor="amount">{t("donation.modal.controls.amount.label")}</label>
                                                 <input
                                                     id="amount"
                                                     className="mt-1 form-input w-full py-2 md:py-3 rounded-lg"
@@ -225,7 +240,7 @@ const Donation = ({donationBlogs}) => {
                                         {loading && <div className="w-7 h-auto">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#FFFFFF" /><stop offset=".3" stopColor="#FFFFFF" stopOpacity=".9" /><stop offset=".6" stopColor="#FFFFFF" stopOpacity=".6" /><stop offset=".8" stopColor="#FFFFFF" stopOpacity=".3" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite" /></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#FFFFFF" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70" /></svg>
                                         </div>}
-                                        {loading ? "Processing..." : "Donate"}
+                                        {loading ? t("donation.modal.processing") : t("donation.modal.donate")}
                                     </button>
                                 </>}
                             </div>}
@@ -258,10 +273,10 @@ const Donation = ({donationBlogs}) => {
             <div className="absolute w-[50px] h-[50px] bg-gradient right-20 bottom-2/3 rounded-full -z-[1]"></div>
             <div className="section bg-white/50 backdrop-blur-lg z-[1] py-10">
                 <div className="container text-center" data-aos="fade-up" data-aos-delay={300}>
-                    <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>Give Support</button>
-                    <p className="my-3">Choose a payment method below to donate:</p>
+                    <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>{t("donation.action.title")}</button>
+                    <p className="my-3">{t("donation.action.subTitle")}</p>
                     <div className="inline-flex gap-3">
-                        <button className="btn btn-outline-primary" onClick={donateViaBakong}>Donate via KHQR</button>
+                        <button className="btn btn-outline-primary" onClick={donateViaBakong}>{t("donation.action.donateViaKhQr")}</button>
                         {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
                     </div>
                 </div>

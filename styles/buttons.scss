@@ -1,12 +1,12 @@
 .btn {
-  @apply inline-block font-primary font-semibold sm:font-bold px-5 py-3 sm:px-7 sm:py-4 leading-[18px] z-[1] border-0 transition-all duration-150 content-center;
+  @apply inline-block font-primary font-semibold sm:font-bold px-5 py-3 sm:px-7 sm:py-4 leading-[18px] z-[1] border-0 transition-all duration-200 content-center;
 
   &:disabled {
     @apply cursor-not-allowed !bg-gray-300 hover:scale-100;
   }
 
   &:focus, &:hover {
-    @apply scale-105 md:scale-[1.075] lg:scale-110;
+    @apply scale-105 md:scale-[1.075] lg:scale-105;
   }
 
   &:active {

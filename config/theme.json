@@ -16,7 +16,7 @@
   "fonts": {
     "font_family": {
       "primary": "Rubik:wght@300;400;700",
-      "primary_type": "sans-serif",
+      "primary_type": "serif",
       "secondary": "Suwannaphum:wght@100;300;400;700;900",
       "secondary_type": "normal"
     },
