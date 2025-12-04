@@ -80,6 +80,15 @@
           "label": "Please enter the amount you want to donate ($)"
         }
       }
+    },
+    "table": {
+      "title": "List of Donations",
+      "fields": {
+        "name": "Name",
+        "amount": "Amount",
+        "currency": "Currency",
+        "type": "Type"
+      }
     }
   },
   "contact": {
@@ -107,5 +116,7 @@
   "loading": "Loading...",
   "noContent": "Blog not Found",
   "share": "Share",
-  "linkCopied": "Link is copied"
+  "linkCopied": "Link is copied",
+  "loadMore": "Load More",
+  "loadingMore": "Loading More..."
 }

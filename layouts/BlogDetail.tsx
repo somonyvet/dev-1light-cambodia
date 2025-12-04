@@ -20,6 +20,7 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [mounted, setMounted] = useState<boolean>(false);
     const [activeIndex, setActiveIndex] = useState<number>(0);
+    const [imageLoading, setImageLoading] = useState<boolean>(true);
     const {t} = useTranslation();
 
     const onViewImage = (index: number) => {
@@ -112,7 +113,7 @@ const BlogDetail: FC<Props> = ({id, blog}) => {
                     </button>
                 </div>
                 <div>
-                    <Image src={data.thumbnail} alt="thumbnail" width={100} height={100} className="w-full aspect-[2/1] object-cover rounded-xl" blurDataURL={data.thumbnail} placeholder="blur"/>
+                    <Image src={imageLoading ? "/images/blank-image-placeholder.jpg" : data.thumbnail} alt="thumbnail" width={100} height={100} className="w-full aspect-[2/1] object-cover rounded-xl" blurDataURL={data.thumbnail} placeholder="blur" onLoadingComplete={() => setImageLoading(false)}/>
                     <div className="mt-3 flex gap-3 overflow-x-auto">
                         {data.images.map((image: string, index: number) => (
                             <div key={index}
