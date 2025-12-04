@@ -64,7 +64,7 @@ const Blogs = ({titles}) => {
                         ))}
                     </div>
                 </>}
-                {(paging.page < paging.totalPages) && <button className="btn btn-outline-primary block mx-auto mt-10" onClick={() => fetchBlogs(paging.page + 1)}>{loading ? t("loadingMore") : t("loadMore")}</button>}
+                {(paging?.page < paging?.totalPages) && <button className="btn btn-outline-primary block mx-auto mt-10" onClick={() => fetchBlogs(paging.page + 1)}>{loading ? t("loadingMore") : t("loadMore")}</button>}
             </div>
         </>
     )
