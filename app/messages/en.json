@@ -116,5 +116,7 @@
   "loading": "Loading...",
   "noContent": "Blog not Found",
   "share": "Share",
-  "linkCopied": "Link is copied"
+  "linkCopied": "Link is copied",
+  "loadMore": "Load More",
+  "loadingMore": "Loading More..."
 }

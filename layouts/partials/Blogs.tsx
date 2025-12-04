@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import BlogCard from "@components/BlogCard";
 import {useTranslation} from "react-i18next";
 
@@ -21,20 +21,28 @@ const Blogs = ({titles}) => {
     const [firstBlog, setFirstBlog] = useState<BlogProps>();
     const [restBlogs, setRestBlogs] = useState<BlogProps[]>([]);
     const [mounted, setMounted] = useState<boolean>(false);
+    const [paging, setPaging] = useState(null);
     const {t} = useTranslation();
 
-    useEffect(() => {
-        setMounted(true);
+    const fetchBlogs = async (page: number) => {
         setLoading(true);
-        fetch("/api/blogs", {
+        await fetch(`/api/blogs?page=${page}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             }
-        }).then(res => res.json()).then(data => {
-            setFirstBlog(data.data[0]);
-            setRestBlogs(data.data.slice(0));
+        }).then(res => res.json()).then(res => {
+            setFirstBlog(res.data[0]);
+            const data = [...restBlogs, ...res.data];
+            setRestBlogs(data);
+            setPaging(res.paging);
         }).catch(err => console.log(err)).finally(() => setLoading(false))
+    }
+
+    useEffect(() => {
+        setMounted(true);
+        fetchBlogs(1).then();
+        // eslint-disable-next-line
     }, []);
 
     if (!mounted) return null;
@@ -44,7 +52,7 @@ const Blogs = ({titles}) => {
             <h1 className="h1 text-center font-bold font-primary text-transparent bg-gradient bg-clip-text" data-aos="fade-up">{t(titles[0])}</h1>
             <h2 className="h2 text-center font-bold font-primary" data-aos="fade-up" data-aos-delay={100}>{t(titles[1])}</h2>
             <div className="section pt-[50px]">
-                {loading ? <div className="text-center">
+                {(loading && !restBlogs.length) ? <div className="text-center">
                     {t("loading")}
                 </div> : <>
                     {firstBlog && <BlogCard id={firstBlog.id} title={firstBlog.title} thumbnail={firstBlog.thumbnail} date={firstBlog.createdAt} view="horizontal" content={firstBlog.content} data-aos="fade-up" data-aos-delay={200}/>}
@@ -56,6 +64,7 @@ const Blogs = ({titles}) => {
                         ))}
                     </div>
                 </>}
+                {(paging.page < paging.totalPages) && <button className="btn btn-outline-primary block mx-auto mt-10" onClick={() => fetchBlogs(paging.page + 1)}>{loading ? t("loadingMore") : t("loadMore")}</button>}
             </div>
         </>
     )

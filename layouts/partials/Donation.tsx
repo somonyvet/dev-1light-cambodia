@@ -105,6 +105,21 @@ const Donation = ({donationBlogs, donation}) => {
         });
     }
 
+    const fetchDonations = async (page: number) => {
+        setDonationLoading(true);
+        await fetch(`/api/donations?page=${page}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json()).then(res => {
+            setDonations(res.data);
+            setPaging(res.paging);
+        }).catch(err => {
+            console.log(err);
+        }).finally(() => setDonationLoading(false))
+    }
+
     useEffect(() => {
         if (show)
             document.body.style.overflowY = "hidden";
@@ -140,21 +155,6 @@ const Donation = ({donationBlogs, donation}) => {
         }
         // eslint-disable-next-line
     }, [show, qr, paymentStatus, amount]);
-
-    const fetchDonations = async (page: number) => {
-        setDonationLoading(true);
-        await fetch(`/api/donations?page=${page}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(res => res.json()).then(res => {
-            setDonations(res.data);
-            setPaging(res.paging);
-        }).catch(err => {
-            console.log(err);
-        }).finally(() => setDonationLoading(false))
-    }
 
     useEffect(() => {
         setMounted(true);
