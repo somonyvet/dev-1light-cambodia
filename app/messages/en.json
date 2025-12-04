@@ -80,6 +80,15 @@
           "label": "Please enter the amount you want to donate ($)"
         }
       }
+    },
+    "table": {
+      "title": "List of Donations",
+      "fields": {
+        "name": "Name",
+        "amount": "Amount",
+        "currency": "Currency",
+        "type": "Type"
+      }
     }
   },
   "contact": {

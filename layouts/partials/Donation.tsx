@@ -15,6 +15,7 @@ import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
 import {Suwannaphum} from "next/font/google";
 import {useTranslation} from "react-i18next";
+import {DonationProps} from "../../types/donation";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
@@ -49,6 +50,9 @@ const Donation = ({donationBlogs, donation}) => {
     const [inputBehavior, setInputBehavior] = useState<"option" | "custom">("option");
     const [timestamp, setTimestamp] = useState<number | null>();
     const [mounted, setMounted] = useState<boolean>(false);
+    const [donations, setDonations] = useState<DonationProps[]>([]);
+    const [donationLoading, setDonationLoading] = useState<boolean>(false);
+    const [paging, setPaging] = useState(null);
     const {t} = useTranslation();
 
     const renderer = ({minutes, seconds, completed}) => {
@@ -137,9 +141,26 @@ const Donation = ({donationBlogs, donation}) => {
         // eslint-disable-next-line
     }, [show, qr, paymentStatus, amount]);
 
+    const fetchDonations = async (page: number) => {
+        setDonationLoading(true);
+        await fetch(`/api/donations?page=${page}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json()).then(res => {
+            setDonations(res.data);
+            setPaging(res.paging);
+        }).catch(err => {
+            console.log(err);
+        }).finally(() => setDonationLoading(false))
+    }
+
     useEffect(() => {
         setMounted(true);
+        fetchDonations(1).then();
     }, []);
+    console.log(paging, "paging");
 
     if (!mounted) return null;
 
@@ -251,10 +272,9 @@ const Donation = ({donationBlogs, donation}) => {
         </div>}
         <div className="pt-10 container">
             <Image
-                src="/images/home-hero.jpg"
-                   // src="https://images.justgiving.com/image/fa736d52-6df6-4c63-9bc5-ba7fff4c2b01.jpg"
-                   alt="donation-banner" className="w-full aspect-[2/1] object-cover rounded-2xl" width={100}
-                   height={100} data-aos="zoom-in" data-aos-delay={500}/>
+                src="/images/home-hero.jpg" priority
+                alt="donation-banner" className="w-full aspect-[2/1] object-cover rounded-2xl" width={100}
+                height={100} data-aos="zoom-in" data-aos-delay={500}/>
             <div
                 data-aos="fade-up" data-aos-delay={600}
                 className="mx-auto w-[95%] md:w-[90%] lg:w-[80%] flex flex-col md:flex-row gap-5 justify-center items-center relative -top-[100px]">
@@ -273,11 +293,51 @@ const Donation = ({donationBlogs, donation}) => {
             <div className="absolute w-[50px] h-[50px] bg-gradient right-20 bottom-2/3 rounded-full -z-[1]"></div>
             <div className="section bg-white/50 backdrop-blur-lg z-[1] py-10">
                 <div className="container text-center" data-aos="fade-up" data-aos-delay={300}>
-                    <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>{t("donation.action.title")}</button>
-                    <p className="my-3">{t("donation.action.subTitle")}</p>
-                    <div className="inline-flex gap-3">
-                        <button className="btn btn-outline-primary" onClick={donateViaBakong}>{t("donation.action.donateViaKhQr")}</button>
-                        {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+                        <div className={!donations.length ? "col-span-2" : null}>
+                            <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>{t("donation.action.title")}</button>
+                            <p className="my-3">{t("donation.action.subTitle")}</p>
+                            <div className="inline-flex gap-3">
+                                <button className="btn btn-outline-primary" onClick={donateViaBakong}>{t("donation.action.donateViaKhQr")}</button>
+                                {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
+                            </div>
+                        </div>
+                        {donations.length ? <div>
+                            <h4>{t("donation.table.title")}</h4>
+                            <div className="bg-white/90 backdrop-blur-md shadow rounded-xl w-full mt-5 overflow-auto">
+                                <SimpleBar className="max-h-[400px] min-w-[350px] overflow-x-auto p-5">
+                                    <table className="w-full">
+                                        <thead>
+                                        <tr className="text-dark">
+                                            <th className="px-3 py-2 font-bold text-start">{t("donation.table.fields.name")}</th>
+                                            <th className="font-bold text-start">{t("donation.table.fields.amount")}</th>
+                                            <th className="font-bold text-start">{t("donation.table.fields.currency")}</th>
+                                            <th className="font-bold">{t("donation.table.fields.type")}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {donationLoading ? <tr>
+                                            <td colSpan={4} className="py-4 text-center">{t("loading")}</td>
+                                        </tr> : donations.map(donation => (
+                                            <tr key={donation.id} className="text-start hover:bg-stone-50 px-3 cursor-pointer">
+                                                <td className="px-3 py-2 rounded-l-lg">{donation.donorName}</td>
+                                                <td>{donation.amount}</td>
+                                                <td>{donation.currency}</td>
+                                                <td className="text-center rounded-r-lg">
+                                                    {donation.type === "bakong-khqr" ? <Image src="/images/khqr.png" alt="khqr" width={40} height={20} className="h-auto object-cover rounded block mx-auto"/> : donation.type}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                </SimpleBar>
+                            </div>
+                            {paging.totalPages > 1 && <div className="mt-5 flex gap-2 justify-center flex-wrap">
+                                {Array(paging.totalPages).fill(0).map((_, index) => (
+                                    <button key={index} disabled={donationLoading} className={`btn text-sm p-0 rounded text-center aspect-square w-10 ${paging.page === index + 1 ? "btn-primary" : "btn-outline-primary"}`} onClick={() => fetchDonations(index + 1)}>{index + 1}</button>
+                                ))}
+                            </div>}
+                        </div> : null}
                     </div>
                 </div>
             </div>

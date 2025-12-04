@@ -4,6 +4,7 @@ import Footer from "@partials/Footer";
 import Header from "@partials/Header";
 import Providers from "@partials/Providers";
 import "../styles/style.scss";
+import "simplebar-react/dist/simplebar.min.css";
 
 import NextTopLoader from "nextjs-toploader";
 import AppTranslation from "@components/AppTranslation";
