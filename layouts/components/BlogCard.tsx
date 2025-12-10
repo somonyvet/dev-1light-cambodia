@@ -27,7 +27,7 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, content, date, onClick, view
             if (onClick)
                 onClick();
             else
-                router.push(`/blogs/${id}`);
+                router.push(`/our-stories/${id}`);
         }
     }
 
@@ -45,7 +45,7 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, content, date, onClick, view
             <h5 className={`overflow-hidden line-clamp-1 sm:line-clamp-2 ${view === "vertical" && "text-lg md:text-xl"}`}>{title}</h5>
             {content && <div dangerouslySetInnerHTML={{__html: content}} className="text-dark overflow-hidden line-clamp-2 md:line-clamp-3"></div>}
             <p className="text-sm overflow-hidden line-clamp-1">{moment(date).format("LLL")}</p>
-            <Link href={`/blogs/${id}`} className="cta-link">
+            <Link href={`/our-stories/${id}`} className="cta-link">
                 {t("readMore")}
                 <Image
                     className="ml-1 group-hover:ml-3"

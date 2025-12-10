@@ -1,7 +1,7 @@
 {
   "menu": {
     "home": "Home",
-    "blog": "Blog",
+    "blog": "Our Stories",
     "donation": "Donation",
     "contact": "Contact"
   },
@@ -21,7 +21,7 @@
       "subTitle": "Providing mental-health support, guidance, and real stories to help individuals rebuild confidence, emotional strength, and a healthier future.",
       "cta": {
         "donate": "Donate Us",
-        "contact": "Contact Us"
+        "contact": "Find Help"
       }
     },
     "value": {

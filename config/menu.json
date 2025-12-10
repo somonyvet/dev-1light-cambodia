@@ -6,7 +6,7 @@
     },
     {
       "name": "menu.blog",
-      "url": "/blogs"
+      "url": "/our-stories"
     },
     {
       "name": "menu.donation",
@@ -23,7 +23,7 @@
         },
         {
           "text": "menu.blog",
-          "url": "/blogs"
+          "url": "/our-stories"
         },
         {
           "text": "menu.donation",

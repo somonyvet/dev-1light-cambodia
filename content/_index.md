@@ -5,13 +5,13 @@ hero:
   image: /images/home-hero.jpg
   ctaButtons:
   - enable: true
-    variant: "btn-outline-primary"
-    label: home.hero.cta.donate
-    link: "/donation"
-  - enable: true
     variant: "btn-primary"
     label: home.hero.cta.contact
     link: "/contact"
+  - enable: true
+    variant: "btn-outline-primary"
+    label: home.hero.cta.donate
+    link: "/donation"
     
 # value/trust section
 value:

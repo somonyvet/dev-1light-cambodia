@@ -80,7 +80,7 @@ const HomeBlogs = ({blog}) => {
                                     </h2>
                                     <div className="mb-2 mt-4" dangerouslySetInnerHTML={{__html: blog.content}}></div>
                                     <Link
-                                        href={`/blogs/${blog.id}`}
+                                        href={`/our-stories/${blog.id}`}
                                         className="cta-link inline-flex items-center"
                                     >
                                         {t("readMore")}
