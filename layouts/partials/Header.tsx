@@ -138,7 +138,7 @@ const Header = () => {
                 {enable && (
                     <div
                         className="order-1 ml-auto hidden items-center justify-end md:order-2 md:ml-0 md:flex gap-2">
-                        <Link className="btn btn-primary z-0 py-3 px-4 rounded-full" href={link}>
+                        <Link className="btn btn-primary z-0 py-3 px-6 rounded-full" href={link}>
                             {t(label)}
                         </Link>
                         <div className="relative group">

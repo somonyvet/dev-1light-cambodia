@@ -6,11 +6,11 @@ import moment from "moment";
 import {useTranslation} from "react-i18next";
 
 interface Props {
-    id: string;
+    id?: string;
     thumbnail: string;
     title: string;
     content?: string;
-    date: string | number;
+    date?: string | number;
     onClick?: () => void;
     view?: "horizontal" | "vertical";
 }

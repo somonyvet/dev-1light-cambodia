@@ -1,9 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
 import {adminDb} from "@lib/firebaseAdmin";
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
     try {
-        const {donorName, md5} = await request.json();
+        const {donorName, md5} = await req.json();
         const token = process.env.BAKONG_ACCESS_TOKEN;
 
         if (!md5 || !donorName) {
@@ -11,9 +11,7 @@ export async function POST(request: NextRequest) {
                 code: 400,
                 message: "Md5 and donor name are required"
             }
-            return new NextResponse(JSON.stringify(error), {
-                status: 400
-            });
+            return NextResponse.json(error, {status: 400})
         }
 
         const transactionResponse = await fetch(`${process.env.BAKONG_API_BASE_URL}/v1/check_transaction_by_md5`, {
@@ -28,14 +26,12 @@ export async function POST(request: NextRequest) {
         const data = await transactionResponse.json();
 
         if (!data.data) {
-            return new NextResponse(JSON.stringify({
+            return NextResponse.json({
                 error: {
                     code: 500,
                     message: data.responseMessage
                 }
-            }), {
-                status: 500
-            });
+            }, {status: 500})
         }
 
         const docData = {...data.data, donorName, type: "bakong-khqr"};
@@ -50,8 +46,6 @@ export async function POST(request: NextRequest) {
             code: 500,
             message: err?.raw?.message ?? "Internal server error"
         }
-        return new NextResponse(JSON.stringify(error), {
-            status: 500
-        });
+        return NextResponse.json(error, {status: 500})
     }
 }
