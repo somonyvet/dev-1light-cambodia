@@ -14,10 +14,12 @@ import {MdOutlinePayment} from "react-icons/md";
 import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
 import {Suwannaphum} from "next/font/google";
+import {PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
 const TIMESTAMP_KEY = "_ts";
+const payPalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!;
 
 interface BakongProps {
     md5: string;
@@ -73,6 +75,9 @@ const Donation = ({donationBlogs}) => {
     //     setShow(true);
     // }
 
+    const donateViaVisa = () => {
+    }
+
     const donateViaBakong = () => {
         onOpenDonationModal();
         setAmount(0);
@@ -96,6 +101,23 @@ const Donation = ({donationBlogs}) => {
             console.log(err, "err for generating khqr");
             setLoading(false);
         });
+    }
+
+    const getPayPayAccessToken = async () => {
+        await fetch("/api/get-auth-paypal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: "Hun Lihong",
+                email: "hunlihong18@gmail.com",
+                amount: 1,
+                orderID: 1
+            })
+        }).then(res => res.json()).then(res => {
+            console.log(res);
+        }).catch(err => console.log(err))
     }
 
     useEffect(() => {
@@ -134,7 +156,7 @@ const Donation = ({donationBlogs}) => {
         // eslint-disable-next-line
     }, [show, qr, paymentStatus, amount]);
 
-    return <div>
+    return <PayPalScriptProvider options={{clientId: payPalClientId, components: "buttons"}}>
         {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center sm:px-3">
             <div className="mx-auto w-full max-w-[768px] bg-white sm:rounded-2xl z-20 sm:h-auto h-screen content-center">
                 <SimpleBar className="max-h-screen md:max-h-[90vh]">
@@ -264,10 +286,33 @@ const Donation = ({donationBlogs}) => {
                         <button className="btn btn-outline-primary" onClick={donateViaBakong}>Donate via KHQR</button>
                         {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
                     </div>
+                    {/*<span className="block text-center my-4 text-dark font-bold">OR</span>*/}
+                    {/*<div className="text-center mx-auto justify-center relative w-full md:max-w-3xl">*/}
+                    {/*    <PayPalButtons*/}
+                    {/*        createOrder={(data, actions) => {*/}
+                    {/*            return actions.order.create({*/}
+                    {/*                intent: "CAPTURE",*/}
+                    {/*                purchase_units: [*/}
+                    {/*                    {*/}
+                    {/*                        amount: {*/}
+                    {/*                            currency_code: "USD",*/}
+                    {/*                            value: "0.10"*/}
+                    {/*                        }*/}
+                    {/*                    }*/}
+                    {/*                ]*/}
+                    {/*            })*/}
+                    {/*        }}*/}
+                    {/*        onApprove={async (data, actions) => {*/}
+                    {/*            return actions.order.capture().then(detail => {*/}
+                    {/*                console.log("Donation completed", detail);*/}
+                    {/*            })*/}
+                    {/*        }}*/}
+                    {/*        style={{layout: "vertical", label: "donate", color: "silver", tagline: false}} className="mx-auto"/>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </div>
-    </div>
+    </PayPalScriptProvider>
 }
 
 export default Donation
