@@ -1,5 +1,5 @@
 const HomeContactVideo = "https://firebasestorage.googleapis.com/v0/b/light-cambodia.firebasestorage.app/o/2025-11-20T08%3A03%3A08_80932%2Fvideos%2Fcontact-vdo.MP4?alt=media&token=09634760-7c7f-413a-bfdd-a737f3a0f327";
 const HomeHeroVideo = "https://firebasestorage.googleapis.com/v0/b/light-cambodia.firebasestorage.app/o/2025-11-20T08%3A03%3A08_80932%2Fvideos%2Fhome-hero-vdo.MP4?alt=media&token=0ad0cacc-a181-4dd7-8f34-a571a0f695eb";
-const BlogVideo = "https://console.firebase.google.com/u/0/project/light-cambodia/storage/light-cambodia.firebasestorage.app/files/~2F2025-11-20T08:03:08_80932~2Fvideos";
+const BlogVideo = "https://firebasestorage.googleapis.com/v0/b/light-cambodia.firebasestorage.app/o/2025-11-20T08%3A03%3A08_80932%2Fvideos%2FIMG_2337.mp4?alt=media&token=9fc264df-9a30-4ee1-b5d7-09fc61934a17";
 
 export {HomeHeroVideo, HomeContactVideo, BlogVideo}
