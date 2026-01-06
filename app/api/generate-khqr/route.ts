@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
         const individualInfo: IndividualInfo & {expirationTimestamp: number} = {
             bakongAccountID: "lihong_hun@aclb",
             acquiringBank: "ACLEDA",
-            merchantName: "1Light Cambodia",
-            merchantNameAlternateLanguage: "Lihong_Hun",
+            merchantName: "1Light World Donation",
+            merchantNameAlternateLanguage: "OneLightWorld",
             expirationTimestamp: Date.now() + 10 * 60 * 1000,
             ...optionalData
         }

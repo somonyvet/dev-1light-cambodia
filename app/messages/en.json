@@ -1,0 +1,122 @@
+{
+  "menu": {
+    "home": "Home",
+    "blog": "Blog",
+    "donation": "Donation",
+    "contact": "Contact"
+  },
+  "english": "English",
+  "khmer": "Khmer",
+  "footer": {
+    "pages": "Pages",
+    "support": "Support",
+    "faq": "FAQ",
+    "policy": "Privacy Policy",
+    "condition": "Terms & Conditions",
+    "content": "Access expert guidance and real-life stories to manage pressure, navigate social media, and thrive during and after your pageant journey."
+  },
+  "home": {
+    "hero": {
+      "title": "Lighting Hope. Healing Minds. Changing Lives.",
+      "subTitle": "Providing mental-health support, guidance, and real stories to help individuals rebuild confidence, emotional strength, and a healthier future.",
+      "cta": {
+        "donate": "Donate Us",
+        "contact": "Contact Us"
+      }
+    },
+    "value": {
+      "preTitle": "You are Not Alone",
+      "title": "We See You",
+      "subTitle": "The pressure of the crown is real. Here are the first steps to finding support and prioritizing your mental well-being.",
+      "actions": {
+        "item1": {
+          "heading": "Need Help Now?",
+          "body": "A brief, urgent message about reaching out if they are in crisis or immediate distress.",
+          "cta": "Chat on Telegram"
+        },
+        "item2": {
+          "heading": "Start Your Healing Journey",
+          "body": "A compassionate message about general well-being and seeking resources.",
+          "cta": "Visit Our Facebook Page"
+        }
+      }
+    },
+    "blog": {
+      "title": "Stories of Resilience"
+    },
+    "donation": {
+      "title": "Support Our Mission",
+      "desc": "Every contribution helps us expand our confidential resource library, fund crisis hotline support, and share more stories of hope.",
+      "cta": "Donate Now"
+    },
+    "contact": {
+      "title1": "Ready to Connect?",
+      "title2": "We're here to listen.",
+      "content": "Whether you're a contestant, family member, partner organization, or media contact, we welcome your message."
+    }
+  },
+  "readMore": "Read more",
+  "blog": {
+    "title": "Hear from the Grown"
+  },
+  "donation": {
+    "action": {
+      "title": "Give Support",
+      "subTitle": "Choose a payment method below to donate:",
+      "donateViaKhQr": "Donate via KHQR"
+    },
+    "modal": {
+      "gi": "General Information",
+      "guideText": "Please select the amount you want to donate",
+      "customAmount": "Custom amount",
+      "donate": "Donate",
+      "processing": "Processing...",
+      "controls": {
+        "name": {
+          "label": "Please enter your full name",
+          "placeholder": "Full name"
+        },
+        "amount": {
+          "label": "Please enter the amount you want to donate ($)"
+        }
+      }
+    },
+    "table": {
+      "title": "List of Donations",
+      "fields": {
+        "name": "Name",
+        "amount": "Amount",
+        "currency": "Currency",
+        "type": "Type"
+      }
+    }
+  },
+  "contact": {
+    "preTitle": "Connect with",
+    "title": "1Light World",
+    "form": {
+      "title": "Send your message to our Email",
+      "controls": {
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Your message"
+      },
+      "submit": "Send Now",
+      "sending": "Sending..."
+    },
+    "secondaryTitle": "How can we help you today?",
+    "text": "We treat every message with the utmost confidentiality and respect. Your personal information will never be shared, and your correspondence will remain secure. Use the button below to send your message securely.",
+    "phone": "Phone number",
+    "alert": {
+      "hello": "Hello",
+      "message": "You have sent your message to our email successfully. We will contact back to you through email. We will contact back to you through email. Thank!"
+    }
+  },
+  "loading": "Loading...",
+  "noContent": "Blog not Found",
+  "share": "Share",
+  "linkCopied": "Link is copied",
+  "loadMore": "Load More",
+  "loadingMore": "Loading More..."
+}

@@ -1,53 +1,53 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "menu.home",
       "url": "/"
     },
     {
-      "name": "Blog",
+      "name": "menu.blog",
       "url": "/blogs"
     },
     {
-      "name": "Donation",
+      "name": "menu.donation",
       "url": "/donation"
     }
   ],
   "footer": [
     {
-      "name": "Pages",
+      "name": "footer.pages",
       "menu": [
         {
-          "text": "Home",
+          "text": "menu.home",
           "url": "/"
         },
         {
-          "text": "Blogs",
+          "text": "menu.blog",
           "url": "/blogs"
         },
         {
-          "text": "Donation",
+          "text": "menu.donation",
           "url": "/donation"
         },
         {
-          "text": "Contact",
+          "text": "menu.contact",
           "url": "/contact"
         }
       ]
     },
     {
-      "name": "Support",
+      "name": "footer.support",
       "menu": [
         {
-          "text": "FAQ",
+          "text": "footer.faq",
           "url": "#"
         },
         {
-          "text": "Privacy Policy",
+          "text": "footer.policy",
           "url": "#"
         },
         {
-          "text": "Terms & Conditions",
+          "text": "footer.condition",
           "url": "#"
         }
       ]

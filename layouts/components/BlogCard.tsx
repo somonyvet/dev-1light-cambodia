@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 interface Props {
-    id: string;
+    id?: string;
     thumbnail: string;
     title: string;
     content?: string;
-    date: string | number;
+    date?: string | number;
     onClick?: () => void;
     view?: "horizontal" | "vertical";
 }
@@ -18,6 +19,7 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, content, date, onClick, view
     const [loading, setLoading] = useState<boolean>(false);
     const [imageLoading, setImageLoading] = useState<boolean>(true);
     const router = useRouter();
+    const {t} = useTranslation();
 
     const handleClick = () => {
         setLoading(true);
@@ -44,7 +46,7 @@ const BlogCard: FC<Props> = ({id, thumbnail, title, content, date, onClick, view
             {content && <div dangerouslySetInnerHTML={{__html: content}} className="text-dark overflow-hidden line-clamp-2 md:line-clamp-3"></div>}
             <p className="text-sm overflow-hidden line-clamp-1">{moment(date).format("LLL")}</p>
             <Link href={`/blogs/${id}`} className="cta-link">
-                Read more
+                {t("readMore")}
                 <Image
                     className="ml-1 group-hover:ml-3"
                     src="/images/arrow-right.svg"

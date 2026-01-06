@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import {useFormik} from "formik";
 import {IoCloseSharp} from "react-icons/io5";
 import emailjs from "@emailjs/browser";
+import {useTranslation} from "react-i18next";
 
 interface DataProps {
     name: string;
@@ -30,6 +31,7 @@ const validationSchema = Yup.object().shape({
 const ContactForm = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [show, setShow] = useState<boolean>(false);
+    const {t} = useTranslation();
     const [data, setData] = useState<DataProps>(initialData);
     const form = useFormik<DataProps>({
         initialValues: data,
@@ -38,21 +40,6 @@ const ContactForm = () => {
         validateOnMount: true,
         onSubmit: async (values, {resetForm}) => {
             setLoading(true);
-            // await fetch("/api/send-email", {
-            //     method: "POST",
-            //     body: JSON.stringify(values),
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     }
-            // }).then(res => res.json()).then((data) => {
-            //     setLoading(false);
-            //     setShow(true);
-            //     resetForm({values: initialData});
-            //     setData({...data, name: values.name});
-            // }).catch(err => {
-            //     console.log(err);
-            //     setLoading(false);
-            // })
 
             const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
             const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -98,28 +85,28 @@ const ContactForm = () => {
                 </button>
             </div>
             <div className="px-5 pb-6 pt-2">
-                Hello {data.name} 👋, You have sent your message to our email successfully. We will contact back to you through email. We will contact back to you through email. Thank!
+                {t("contact.alert.hello")} {data.name} 👋, {t("contact.alert.message")}
             </div>
         </div>}
         <form className="contact-form mt-5 md:mt-0" onSubmit={form.handleSubmit}>
-            <h5 className="mb-5" data-aos="fade-up" data-aos-delay={200}>Send your message to our Email</h5>
+            <h5 className="mb-5" data-aos="fade-up" data-aos-delay={200}>{t("contact.form.title")}</h5>
             <div className="mb-3" data-aos="fade-up" data-aos-delay={300}>
-                <input className="form-input w-full" name="name" type="text" placeholder="Name" value={form.values.name} onChange={onInputChange} required/>
+                <input className="form-input w-full" name="name" type="text" placeholder={t("contact.form.controls.name")} value={form.values.name} onChange={onInputChange} required/>
             </div>
             <div className="mb-3" data-aos="fade-up" data-aos-delay={400}>
-                <input className="form-input w-full" name="email" type="email" placeholder="Your email" value={form.values.email} onChange={onInputChange} required/>
+                <input className="form-input w-full" name="email" type="email" placeholder={t("contact.form.controls.email")} value={form.values.email} onChange={onInputChange} required/>
             </div>
             <div className="mb-3" data-aos="fade-up" data-aos-delay={500}>
-                <input className="form-input w-full" name="subject" type="text" placeholder="Subject" value={form.values.subject} onChange={onInputChange} required/>
+                <input className="form-input w-full" name="subject" type="text" placeholder={t("contact.form.controls.subject")} value={form.values.subject} onChange={onInputChange} required/>
             </div>
             <div className="mb-3" data-aos="fade-up" data-aos-delay={600}>
-                <textarea className="form-textarea w-full rounded-lg" rows={7} placeholder="Your message" name="message" value={form.values.message} onChange={onInputChange}/>
+                <textarea className="form-textarea w-full rounded-lg" rows={7} placeholder={t("contact.form.controls.message")} name="message" value={form.values.message} onChange={onInputChange}/>
             </div>
             <button type="submit" className="h-[50px] btn btn-primary mx-auto flex gap-2 justify-center items-center" disabled={!form.isValid || loading} data-aos="fade-up" data-aos-delay={700}>
                 {loading && <div className="w-5 h-auto relative">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#FFFFFF"/><stop offset=".3" stopColor="#FFFFFF" stopOpacity=".9"/><stop offset=".6" stopColor="#FFFFFF" stopOpacity=".6"/><stop offset=".8" stopColor="#FFFFFF" stopOpacity=".3"/><stop offset="1" stopColor="#FFFFFF" stopOpacity="0"/></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"/></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#FFFFFF" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70"/></svg>
                 </div>}
-                {loading ? "Sending..." : "Send Now"}
+                {loading ? t("contact.form.sending") : t("contact.form.submit")}
             </button>
         </form>
     </Fragment>

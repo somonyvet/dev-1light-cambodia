@@ -4,8 +4,10 @@ import Footer from "@partials/Footer";
 import Header from "@partials/Header";
 import Providers from "@partials/Providers";
 import "../styles/style.scss";
+import "simplebar-react/dist/simplebar.min.css";
 
 import NextTopLoader from "nextjs-toploader";
+import AppTranslation from "@components/AppTranslation";
 
 export const metadata = {
     title: "1Light World",
@@ -62,9 +64,11 @@ export default function RootLayout({children}) {
         </head>
         <body suppressHydrationWarning={true}>
         <NextTopLoader color="#7458b1" showSpinner={false}/>
-        <Header/>
-        <Providers>{children}</Providers>
-        <Footer/>
+        <AppTranslation>
+            <Header/>
+            <Providers>{children}</Providers>
+            <Footer/>
+        </AppTranslation>
         </body>
         </html>
     )

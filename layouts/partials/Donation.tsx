@@ -14,12 +14,12 @@ import {MdOutlinePayment} from "react-icons/md";
 import Countdown from "react-countdown";
 import {removeSessionItem, setSessionItem} from "@lib/utils/storage";
 import {Suwannaphum} from "next/font/google";
-import {PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer} from "@paypal/react-paypal-js";
+import {useTranslation} from "react-i18next";
+import {DonationProps} from "../../types/donation";
 
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 const stripePromise = loadStripe(stripePublishableKey);
 const TIMESTAMP_KEY = "_ts";
-const payPalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!;
 
 interface BakongProps {
     md5: string;
@@ -38,7 +38,7 @@ const ExpiredSession = ({setQr}) => {
     return <p className="text-sm mt-6">Expired</p>
 }
 
-const Donation = ({donationBlogs}) => {
+const Donation = ({donationBlogs, donation}) => {
     const [donorName, setDonorName] = useState<string>("");
     const [activeIndex, setActiveIndex] = useState(1);
     const [show, setShow] = useState<boolean>(false);
@@ -49,6 +49,11 @@ const Donation = ({donationBlogs}) => {
     const [paymentStatus, setPaymentStatus] = useState<boolean>(false);
     const [inputBehavior, setInputBehavior] = useState<"option" | "custom">("option");
     const [timestamp, setTimestamp] = useState<number | null>();
+    const [mounted, setMounted] = useState<boolean>(false);
+    const [donations, setDonations] = useState<DonationProps[]>([]);
+    const [donationLoading, setDonationLoading] = useState<boolean>(false);
+    const [paging, setPaging] = useState(null);
+    const {t} = useTranslation();
 
     const renderer = ({minutes, seconds, completed}) => {
         if (completed)
@@ -75,9 +80,6 @@ const Donation = ({donationBlogs}) => {
     //     setShow(true);
     // }
 
-    const donateViaVisa = () => {
-    }
-
     const donateViaBakong = () => {
         onOpenDonationModal();
         setAmount(0);
@@ -103,21 +105,19 @@ const Donation = ({donationBlogs}) => {
         });
     }
 
-    const getPayPayAccessToken = async () => {
-        await fetch("/api/get-auth-paypal", {
-            method: "POST",
+    const fetchDonations = async (page: number) => {
+        setDonationLoading(true);
+        await fetch(`/api/donations?page=${page}`, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: "Hun Lihong",
-                email: "hunlihong18@gmail.com",
-                amount: 1,
-                orderID: 1
-            })
+            }
         }).then(res => res.json()).then(res => {
-            console.log(res);
-        }).catch(err => console.log(err))
+            setDonations(res.data);
+            setPaging(res.paging);
+        }).catch(err => {
+            console.log(err);
+        }).finally(() => setDonationLoading(false))
     }
 
     useEffect(() => {
@@ -156,7 +156,21 @@ const Donation = ({donationBlogs}) => {
         // eslint-disable-next-line
     }, [show, qr, paymentStatus, amount]);
 
-    return <PayPalScriptProvider options={{clientId: payPalClientId, components: "buttons"}}>
+    useEffect(() => {
+        setMounted(true);
+        fetchDonations(1).then();
+    }, []);
+    console.log(paging, "paging");
+
+    if (!mounted) return null;
+
+    return <div>
+        <div className="container text-center">
+            <div className="w-full md:w-3/4 mx-auto">
+                <h1 className="font-primary font-bold bg-gradient text-transparent bg-clip-text" data-aos="fade-up">{t(donation.title)}</h1>
+                <p className="mt-4 text-base md:text-lg lg:text-xl" data-aos="fade-up" data-aos-delay={100}>{t(donation.description)}</p>
+            </div>
+        </div>
         {show && <div className="fixed w-full h-screen bg-black/50 left-0 top-0 z-10 flex items-center sm:px-3">
             <div className="mx-auto w-full max-w-[768px] bg-white sm:rounded-2xl z-20 sm:h-auto h-screen content-center">
                 <SimpleBar className="max-h-screen md:max-h-[90vh]">
@@ -201,9 +215,9 @@ const Donation = ({donationBlogs}) => {
                                     <div className="mb-3">
                                         <div className="mb-5 text-center">
                                             <div>
-                                                <p className="font-semibold text-dark text-lg md:text-xl">General Information</p>
+                                                <p className="font-semibold text-dark text-lg md:text-xl">{t("donation.modal.gi")}</p>
                                                 <div className="text-start my-4">
-                                                    <label htmlFor="donorName">Please enter your full name</label>
+                                                    <label htmlFor="donorName">{t("donation.modal.controls.name.label")}</label>
                                                     <input
                                                         id="donorName"
                                                         className="mt-1 form-input w-full py-2 md:py-3 rounded-lg"
@@ -211,19 +225,19 @@ const Donation = ({donationBlogs}) => {
                                                         type="text"
                                                         value={donorName}
                                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDonorName(e.target.value)}
-                                                        placeholder="Full name"
+                                                        placeholder={t("donation.modal.controls.name.placeholder")}
                                                         required
                                                     />
                                                 </div>
                                             </div>
-                                            <p className="font-semibold text-dark text-lg md:text-xl">Please select the amount you want to donate</p>
+                                            <p className="font-semibold text-dark text-lg md:text-xl">{t("donation.modal.guideText")}</p>
                                             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                                                 {DonationAmountOptions.map((option, index) => (
                                                     <div key={index} className={`p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark ${amount === option && "border-transparent ring-primary ring-2 text-black"}`} onClick={() => setAmount(option)}>{option}$</div>
                                                 ))}
                                             </div>
-                                            {inputBehavior === "option" ? <div className="mt-3 md:mt-4 p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark" onClick={() => setInputBehavior("custom")}>Custom amount</div> : <div className="mt-3 md:mt-4 text-start">
-                                                <label htmlFor="amount">Please enter the amount($) you want to donate</label>
+                                            {inputBehavior === "option" ? <div className="mt-3 md:mt-4 p-2 md:p-3 grow border text-center content-center cursor-pointer rounded-lg transition-all duration-150 hover:shadow hover:text-dark" onClick={() => setInputBehavior("custom")}>{t("donation.modal.customAmount")}</div> : <div className="mt-3 md:mt-4 text-start">
+                                                <label htmlFor="amount">{t("donation.modal.controls.amount.label")}</label>
                                                 <input
                                                     id="amount"
                                                     className="mt-1 form-input w-full py-2 md:py-3 rounded-lg"
@@ -247,7 +261,7 @@ const Donation = ({donationBlogs}) => {
                                         {loading && <div className="w-7 h-auto">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a12" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#FFFFFF" /><stop offset=".3" stopColor="#FFFFFF" stopOpacity=".9" /><stop offset=".6" stopColor="#FFFFFF" stopOpacity=".6" /><stop offset=".8" stopColor="#FFFFFF" stopOpacity=".3" /><stop offset="1" stopColor="#FFFFFF" stopOpacity="0" /></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a12)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite" /></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#FFFFFF" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70" /></svg>
                                         </div>}
-                                        {loading ? "Processing..." : "Donate"}
+                                        {loading ? t("donation.modal.processing") : t("donation.modal.donate")}
                                     </button>
                                 </>}
                             </div>}
@@ -258,10 +272,9 @@ const Donation = ({donationBlogs}) => {
         </div>}
         <div className="pt-10 container">
             <Image
-                src="/images/home-hero.jpg"
-                   // src="https://images.justgiving.com/image/fa736d52-6df6-4c63-9bc5-ba7fff4c2b01.jpg"
-                   alt="donation-banner" className="w-full aspect-[2/1] object-cover rounded-2xl" width={100}
-                   height={100} data-aos="zoom-in" data-aos-delay={500}/>
+                src="/images/home-hero.jpg" priority
+                alt="donation-banner" className="w-full aspect-[2/1] object-cover rounded-2xl" width={100}
+                height={100} data-aos="zoom-in" data-aos-delay={500}/>
             <div
                 data-aos="fade-up" data-aos-delay={600}
                 className="mx-auto w-[95%] md:w-[90%] lg:w-[80%] flex flex-col md:flex-row gap-5 justify-center items-center relative -top-[100px]">
@@ -280,39 +293,56 @@ const Donation = ({donationBlogs}) => {
             <div className="absolute w-[50px] h-[50px] bg-gradient right-20 bottom-2/3 rounded-full -z-[1]"></div>
             <div className="section bg-white/50 backdrop-blur-lg z-[1] py-10">
                 <div className="container text-center" data-aos="fade-up" data-aos-delay={300}>
-                    <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>Give Support</button>
-                    <p className="my-3">Choose a payment method below to donate:</p>
-                    <div className="inline-flex gap-3">
-                        <button className="btn btn-outline-primary" onClick={donateViaBakong}>Donate via KHQR</button>
-                        {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-[40px]">
+                        <div className={!donations.length ? "col-span-2" : null}>
+                            <button className="btn btn-primary block mx-auto cursor-default" onClick={undefined}>{t("donation.action.title")}</button>
+                            <p className="my-3">{t("donation.action.subTitle")}</p>
+                            <div className="inline-flex gap-3">
+                                <button className="btn btn-outline-primary" onClick={donateViaBakong}>{t("donation.action.donateViaKhQr")}</button>
+                                {/*<button className="btn btn-outline-primary" onClick={donateViaVisa}>VISA</button>*/}
+                            </div>
+                        </div>
+                        {donations.length ? <div>
+                            <h4>{t("donation.table.title")}</h4>
+                            <div className="bg-white/90 backdrop-blur-md shadow rounded-xl w-full mt-5 overflow-auto">
+                                <SimpleBar className="max-h-[400px] min-w-[350px] overflow-x-auto p-5">
+                                    <table className="w-full">
+                                        <thead>
+                                        <tr className="text-dark">
+                                            <th className="px-3 py-2 font-bold text-start">{t("donation.table.fields.name")}</th>
+                                            <th className="font-bold text-start">{t("donation.table.fields.amount")}</th>
+                                            <th className="font-bold text-start">{t("donation.table.fields.currency")}</th>
+                                            <th className="font-bold">{t("donation.table.fields.type")}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {donationLoading ? <tr>
+                                            <td colSpan={4} className="py-4 text-center">{t("loading")}</td>
+                                        </tr> : donations.map(donation => (
+                                            <tr key={donation.id} className="text-start hover:bg-stone-50 px-3 cursor-pointer">
+                                                <td className="px-3 py-2 rounded-l-lg">{donation.donorName}</td>
+                                                <td>{donation.amount}</td>
+                                                <td>{donation.currency}</td>
+                                                <td className="text-center rounded-r-lg">
+                                                    {donation.type === "bakong-khqr" ? <Image src="/images/khqr.png" alt="khqr" width={40} height={20} className="h-auto object-cover rounded block mx-auto"/> : donation.type}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                        </tbody>
+                                    </table>
+                                </SimpleBar>
+                            </div>
+                            {paging.totalPages > 1 && <div className="mt-5 flex gap-2 justify-center flex-wrap">
+                                {Array(paging.totalPages).fill(0).map((_, index) => (
+                                    <button key={index} disabled={donationLoading} className={`btn text-sm p-0 rounded text-center aspect-square w-10 ${paging.page === index + 1 ? "btn-primary" : "btn-outline-primary"}`} onClick={() => fetchDonations(index + 1)}>{index + 1}</button>
+                                ))}
+                            </div>}
+                        </div> : null}
                     </div>
-                    {/*<span className="block text-center my-4 text-dark font-bold">OR</span>*/}
-                    {/*<div className="text-center mx-auto justify-center relative w-full md:max-w-3xl">*/}
-                    {/*    <PayPalButtons*/}
-                    {/*        createOrder={(data, actions) => {*/}
-                    {/*            return actions.order.create({*/}
-                    {/*                intent: "CAPTURE",*/}
-                    {/*                purchase_units: [*/}
-                    {/*                    {*/}
-                    {/*                        amount: {*/}
-                    {/*                            currency_code: "USD",*/}
-                    {/*                            value: "0.10"*/}
-                    {/*                        }*/}
-                    {/*                    }*/}
-                    {/*                ]*/}
-                    {/*            })*/}
-                    {/*        }}*/}
-                    {/*        onApprove={async (data, actions) => {*/}
-                    {/*            return actions.order.capture().then(detail => {*/}
-                    {/*                console.log("Donation completed", detail);*/}
-                    {/*            })*/}
-                    {/*        }}*/}
-                    {/*        style={{layout: "vertical", label: "donate", color: "silver", tagline: false}} className="mx-auto"/>*/}
-                    {/*</div>*/}
                 </div>
             </div>
         </div>
-    </PayPalScriptProvider>
+    </div>
 }
 
 export default Donation
